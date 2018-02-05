@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 import constants from '../config/constants';
-import User from '../models/User';
+import User from '../models/user';
 
 export async function requireAuth(user) {
   if (!user || !user._id) {

@@ -3,9 +3,11 @@ var mongoose = require('mongoose');
 import {hashSync, compareSync} from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 
+import constants from '../config/constants'
+
 
 var userSchema = new mongoose.Schema({
-    name: {
+    username: {
         type: String,
         required: true
     },
