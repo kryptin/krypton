@@ -1,10 +1,10 @@
-//import mongoose from 'mongoose';
-var mongoose = require('mongoose');
-import {hashSync, compareSync} from 'bcrypt-nodejs';
+import mongoose, { Schema } from 'mongoose';
+import { hashSync, compareSync } from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 
 
-var userSchema = new mongoose.Schema({
+var Schemas = mongoose.Schema;
+var userSchema = new Schemas({
     name: {
         type: String,
         required: true
@@ -17,6 +17,8 @@ var userSchema = new mongoose.Schema({
     created_at: Date,
     updated_at: Date
 });
+
+
 
 userSchema.pre('save', function (next) {
     if (this.isModified('password')) {
@@ -46,6 +48,6 @@ userSchema.methods = {
             constants.JWT_SECRET
         )
     }
-}
+};
 
 export default mongoose.model('User', userSchema);

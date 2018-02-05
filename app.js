@@ -1,10 +1,10 @@
 import express from 'express';
-import log4js from './shared/logger';
+
 import {environment, serverConf} from './config';
 import {createServer} from "http";
 import './config/db';
 import middlewares from './config/middlewares';
-
+import log4js from './shared/logger';
 var logger = log4js.getLogger();
 const app = express();
 
