@@ -2,10 +2,11 @@ import mongoose, { Schema } from 'mongoose';
 import { hashSync, compareSync } from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 
+import constants from '../config/constants'
 
-var Schemas = mongoose.Schema;
-var userSchema = new Schemas({
-    name: {
+
+var userSchema = new mongoose.Schema({
+    username: {
         type: String,
         required: true
     },

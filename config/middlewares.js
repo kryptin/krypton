@@ -3,11 +3,13 @@
 import bodyParser from 'body-parser';
 import {graphiqlExpress, graphqlExpress} from 'apollo-server-express';
 import {makeExecutableSchema} from 'graphql-tools';
-import graphqlHTTP from 'express-graphql';
+//import graphqlHTTP from 'express-graphql';
 
 import constants from './constants';
 import {decodeToken} from '../services/auth';
-import schema from '../graphql';
+//import schema from '../graphql';
+import typeDefs from '../graphql/schema';
+import resolvers from '../graphql/resolvers';
 import cors from 'cors';
 import {environment} from "./index";
 
@@ -27,25 +29,37 @@ async function auth(req, res, next) {
     }
 }
 
+const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
+  });
+
 export default app => {
-    // app.use(cors());
-    // app.use(bodyParser.json());
-    // app.use(auth);
-    // app.use(
-    //     '/graphiql',
-    //     graphiqlExpress({
-    //         endpointURL: constants.GRAPHQL_PATH,
-    //     }),
-    // );
-    // app.use(
-    //     constants.GRAPHQL_PATH,
-    //     graphqlExpress(req => ({
-    //         schema,
-    //         context: {
-    //             user: req.user
-    //         }
-    //     })),
-    // );
+    app.use(cors());
+    app.use(bodyParser.json());
+    app.use(auth);
+    app.use(
+        '/graphiql',
+        graphiqlExpress({
+            endpointURL: constants.GRAPHQL_PATH,
+        }),
+    );
+    app.use(
+        constants.GRAPHQL_PATH,
+        graphqlExpress(req => ({
+            schema,
+            context: {
+                user: req.user
+            }
+        })),
+    );
+
+}
+
+
+      /*
+      
+app.use(auth);
     app.use(
         constants.GRAPHQL_PATH,
         graphqlHTTP((request, response, graphQLParams) => ({
@@ -59,3 +73,4 @@ export default app => {
         }))
     );
 }
+*/
