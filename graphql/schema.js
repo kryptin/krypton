@@ -1,3 +1,5 @@
+
+
 export default`
   scalar Date
   type User {
@@ -18,16 +20,16 @@ export default`
     title: String
     user: User
     description: String
-    createdAt: Date
-    updatedAt: Date    
+    created_at: Date
+    updated_at: Date    
   }
   type Event {
     _id: String
     title: String
     description: String
     status: Int
-    createdAt: Date
-    updatedAt: Date
+    created_at: Date
+    updated_at: Date
   }
   type Comment {
     _id: String

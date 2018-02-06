@@ -13,8 +13,8 @@ export default {
   },
   addGroup: async (_, args, { user }) => {
     try {
-      await requireAuth(user);
-      return Group.create({ ...args, user: user._id });
+      //await requireAuth(user);
+      return Group.create({ ...args });
     } catch (error) {
       throw error;
     }
