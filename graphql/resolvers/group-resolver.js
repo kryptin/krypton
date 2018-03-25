@@ -14,7 +14,8 @@ export default {
   addGroup: async (_, args, { user }) => {
     try {
       //await requireAuth(user);
-      return Group.create({ ...args });
+      const duserid = user? user._id: user;
+      return Group.create({ ...args, user: duserid });
     } catch (error) {
       throw error;
     }
