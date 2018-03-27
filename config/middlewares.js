@@ -14,9 +14,9 @@ import cors from 'cors';
 import {environment} from "./index";
 
 
-async function auth(req, res, next) {
+async function auth(req, res, next) { console.log(JSON.stringify(req.headers,null, 4));
     try {
-        const token = req.headers.authorization;
+        const token = req.headers.authorization; console.log('token on the server'); console.log(token)
         if (token != null) {
             const user = await decodeToken(token);
             req.user = user;

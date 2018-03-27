@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 var groupSchema = new mongoose.Schema({
     title: {
@@ -8,6 +8,11 @@ var groupSchema = new mongoose.Schema({
     description: {
         type: String
     },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },  
+    
     created_at: Date,
     updated_at: Date
 });
