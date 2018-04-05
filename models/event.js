@@ -9,6 +9,10 @@ var eventSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    group: {
+        type: Schema.Types.ObjectId,
+        ref: 'Group'
+    },  
     status: {
         type: Number
     },

@@ -26,6 +26,7 @@ export default`
   type Event {
     _id: String
     title: String
+    group: Group
     description: String
     status: Int
     created_at: Date
