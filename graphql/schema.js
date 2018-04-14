@@ -36,6 +36,16 @@ export default`
     name: String
     type: String
   }
+  type Profile{
+    _id: String
+    first_name: String
+    last_name: String
+    country: String
+    user: User
+    state: String
+    location: String
+    image_path: String
+  }
   type Status {
     message: String!
   }
@@ -45,14 +55,19 @@ export default`
     getGroups: [Group]
     getComments: [Comment]
     getEvent(_id: ID!): Event
+    getProfile(_id: ID!): [Profile]
     me: Me
   }
   type Mutation {
-    addEvent(title: String!, description: String, status: Int): Event
     addGroup(title: String!, description: String): Group
+
+    addEvent(title: String!, description: String, status: Int): Event
     addComment(text:String!, postId: Int): Comment
     updateEvent(_id: ID!, name: String): Event
     deleteEvent(_id: ID!): Status
+
+    addProfile(country: String, state: String): Profile
+    updateProfile(first_name:String!, last_name:String!, country: String!, state: String!, image_path:String): Profile
 
     signup(email: String!, password: String!, username: String): Auth
     login(email: String!, password: String!): Auth
