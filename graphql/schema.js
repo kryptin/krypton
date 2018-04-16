@@ -57,7 +57,7 @@ export default`
     getGroup(_id: ID!): Group
     getComments: [Comment]
     getEvent(_id: ID!): Event
-    getProfile(_id: ID!): [Profile]
+    getProfile(_id: ID!): Profile
     me: Me
   }
   type Mutation {

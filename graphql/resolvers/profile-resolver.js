@@ -3,11 +3,11 @@ import { requireAuth } from '../../services/auth';
 
 export default {
 
-  getProfile: async (_, args, { user }) => {
+  getProfile: async (_, {_id}, { user }) => {
     try {
       //await requireAuth(user);
       // return Profile.findOne({ _id, user: user._id });
-      return Profile.find({}).sort({ createdAt: -1 })
+      return Profile.findById(_id);
     } catch (error) {
       throw error;
     }
