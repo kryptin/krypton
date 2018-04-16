@@ -11,10 +11,19 @@ export default {
       throw error;
     }
   },
+  getEvent: async (_, { _id }, { user }) => {
+    try {
+     // await requireAuth(user);
+      return Event.findById(_id);
+    } catch (error) {
+      throw error;
+    }
+  },
   addEvent: async (_, args, { user }) => {
     try {
-      await requireAuth(user);
-      return Event.create({ ...args, user: user._id });
+      console.log(args);
+      //await requireAuth(user);
+      return Event.create({ ...args/*, user: user._id*/ });
     } catch (error) {
       throw error;
     }

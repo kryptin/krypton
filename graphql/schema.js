@@ -16,7 +16,7 @@ export default`
     email: String!
   }
   type Group {
-    _id: String
+    _id: ID!
     title: String
     user: User
     description: String
@@ -24,7 +24,7 @@ export default`
     updated_at: Date    
   }
   type Event {
-    _id: String
+    _id: ID!
     title: String
     group: Group
     description: String
@@ -44,12 +44,13 @@ export default`
   type Query {
     getEvents: [Event]
     getGroups: [Group]
+    getGroup(_id: ID!): Group
     getComments: [Comment]
     getEvent(_id: ID!): Event
     me: Me
   }
   type Mutation {
-    addEvent(title: String!, description: String, status: Int): Event
+    addEvent(title: String!, description: String, group: ID, status: Int): Event
     addGroup(title: String!, description: String): Group
     addComment(text:String!, postId: Int): Comment
     updateEvent(_id: ID!, name: String): Event

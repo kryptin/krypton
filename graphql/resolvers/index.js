@@ -12,7 +12,9 @@ export default {
     },
     Query: {
         getGroups: GroupResolvers.getGroups,
+        getGroup: GroupResolvers.getGroup,
         getEvents: EventResolvers.getEvents,
+        getEvent: EventResolvers.getEvent,
         getComments: CommentResolvers.getComments,
         me: UserResolvers.me,
     },
