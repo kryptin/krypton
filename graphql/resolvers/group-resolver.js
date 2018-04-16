@@ -11,6 +11,15 @@ export default {
       throw error;
     }
   },
+  getGroup: async (_, { _id }, { user }) => {
+    try {
+     // await requireAuth(user);
+      return Group.findById(_id);
+    } catch (error) {
+      throw error;
+    }
+  },
+
   addGroup: async (_, args, { user }) => {
     try {
       //await requireAuth(user);
