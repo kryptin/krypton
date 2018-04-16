@@ -17,7 +17,7 @@ try {
 
 mongoose.connection
     .once('open', () => {
-        logger.info('MongoDB Running yo!')
+        logger.info('MongoDB Running yep!')
     })
     .on('error', e => {
         throw e;
