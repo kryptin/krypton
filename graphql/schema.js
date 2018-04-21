@@ -1,6 +1,4 @@
-
-
-export default`
+export default `
   scalar Date
   type User {
     _id: ID!
@@ -22,6 +20,23 @@ export default`
     description: String
     created_at: Date
     updated_at: Date    
+  }
+  type Request {
+    _id: ID!
+    senderUser: User
+    group: Group
+    event: Event
+    receiverUser: String
+    url: String
+    created_at: Date
+    updated_at: Date    
+  }
+  input RequestInput {
+    senderUser: String!
+    group: String
+    event: String
+    receiverUser: String
+    url: String
   }
   type Event {
     _id: ID!
@@ -53,6 +68,8 @@ export default`
 
   type Query {
     getEvents: [Event]
+    getRequests: [Request]
+    getRequest(_id: ID!): Request
     getGroups: [Group]
     getGroup(_id: ID!): Group
     getComments: [Comment]
@@ -62,6 +79,9 @@ export default`
   }
   type Mutation {
     addGroup(title: String!, description: String): Group
+    
+    
+    addRequest(input: RequestInput): Request
 
     addEvent(title: String!, description: String,  group: ID, status: Int): Event
     addComment(text:String!, postId: Int): Comment

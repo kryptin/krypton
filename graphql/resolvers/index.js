@@ -4,16 +4,29 @@ import EventResolvers from './event-resolver';
 import CommentResolvers from './comment-resolver';
 import UserResolvers from './user-resolver';
 import ProfileResolvers from './profile-resolver';
+import RequestResolvers from './request-resolver';
 import User from '../../models/user';
+import Group from '../../models/group';
+import Event from '../../models/event';
 
 export default {
     Date: GraphQLDate,
     Group: {
         user: ({user}) => User.findById(user),
     },
+    Request: {
+        senderUser: ({user}) => User.findById(user),
+        group: ({group}) => Group.findById(group),
+        event: ({event}) => Event.findById(event),
+    },
     Query: {
         getGroups: GroupResolvers.getGroups,
         getGroup: GroupResolvers.getGroup,
+
+        getRequests: RequestResolvers.getRequests,
+        getRequest: RequestResolvers.getRequest,
+
+
         getEvents: EventResolvers.getEvents,
         getEvent: EventResolvers.getEvent,
         getComments: CommentResolvers.getComments,
@@ -22,6 +35,10 @@ export default {
     },
     Mutation: {
         addGroup: GroupResolvers.addGroup,
+
+        addRequest: RequestResolvers.addRequest,
+
+
         addEvent: EventResolvers.addEvent,
         addComment: CommentResolvers.addComment,
         addProfile: ProfileResolvers.addProfile,
