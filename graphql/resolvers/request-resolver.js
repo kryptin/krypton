@@ -23,9 +23,10 @@ export default {
     addRequest: async (_, {input}, {user}) => {
         try {
             //await requireAuth(user);
-            console.log(input)
+            console.log(user);
             const duserid = user ? user._id : user;
-            return Request.create({...input, user: duserid});
+            let requestObj = {...input, senderUser: duserid};
+            return !!Request.create(requestObj);
         } catch (error) {
             throw error;
         }

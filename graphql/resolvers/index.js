@@ -18,6 +18,7 @@ export default {
     },
     Request: {
         senderUser: ({user}) => User.findById(user),
+        receiverUser: ({user}) => User.findById(user),
         group: ({group}) => Group.findById(group),
         event: ({event}) => Event.findById(event),
     },
@@ -33,10 +34,13 @@ export default {
         getEvent: EventResolvers.getEvent,
         getComments: CommentResolvers.getComments,
         getProfile: ProfileResolvers.getProfile,
+
+
         me: UserResolvers.me,
+        userSearch: UserResolvers.userSearch,
         //for photo
         getPhotos: PhotoResolvers.getPhotos,
-        getPhoto: PhotoResolvers.getPhoto,     
+        getPhoto: PhotoResolvers.getPhoto,
     },
     Mutation: {
         addGroup: GroupResolvers.addGroup,
@@ -59,7 +63,7 @@ export default {
     // I must use dataloader on this later
 
     Event: {
-        group: ({ group }) => Group.findById(group),
-      },
-    
+        group: ({group}) => Group.findById(group),
+    },
+
 }

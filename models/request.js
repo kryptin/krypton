@@ -14,7 +14,8 @@ var requestSchema = new mongoose.Schema({
         ref: 'Event'
     },
     receiverUser: {
-        type: String
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     url: {
         type: String

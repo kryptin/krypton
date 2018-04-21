@@ -57,7 +57,6 @@ export default app => {
                 if (err.originalError && err.originalError.error_message) {
                     err.message = err.originalError.error_message;
                 }
-                console.log("whyyyy  >>>>  " + err);
                 return err;
             }
         })),

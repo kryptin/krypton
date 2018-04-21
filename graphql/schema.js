@@ -26,13 +26,13 @@ export default `
     senderUser: User
     group: Group
     event: Event
-    receiverUser: String
+    receiverUser: User
     url: String
     created_at: Date
     updated_at: Date    
   }
   input RequestInput {
-    senderUser: String!
+    senderUser: String
     group: String
     event: String
     receiverUser: String
@@ -89,6 +89,7 @@ export default `
     getComments: [Comment]
     getEvent(_id: ID!): Event
     getProfile(_id: ID!): Profile
+    userSearch(params: String!): [User]
     me: Me
    
     getPhotos: [Photo]
@@ -99,7 +100,7 @@ export default `
     addGroup(title: String!, description: String): Group
     
     
-    addRequest(input: RequestInput): Request
+    addRequest(input: RequestInput): Boolean
 
     addEvent(title: String!, description: String,  group: ID, status: Int): Event
     addComment(text:String!, postId: Int): Comment
