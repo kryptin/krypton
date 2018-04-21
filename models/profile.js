@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 var profileSchema = new mongoose.Schema({
     first_name: {
@@ -24,10 +24,10 @@ var profileSchema = new mongoose.Schema({
     image_path: {
         type: String,
     },
-    // user: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User'
-    // },  
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },  
     created_at: Date,
     updated_at: Date
 });

@@ -11,13 +11,13 @@ var groupSchema = new mongoose.Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    },  
-    
+    },
+
     created_at: Date,
     updated_at: Date
 });
 
-groupSchema.pre('save', function (next) {
+groupSchema.pre('save', function(next) {
 
     var currentDate = new Date();
     this.updated_at = currentDate;

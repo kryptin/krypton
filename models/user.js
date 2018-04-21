@@ -20,7 +20,6 @@ var userSchema = new mongoose.Schema({
 });
 
 
-
 userSchema.pre('save', function (next) {
     if (this.isModified('password')) {
         this.password = this._hashPassword(this.password);
