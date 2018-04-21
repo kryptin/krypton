@@ -4,6 +4,8 @@ import { requireAuth } from '../../services/auth';
 export default {
 
   getEvents: async (_, args, { user }) => {
+    console.log('user context in event: ',user)
+
     try {
       //await requireAuth(user);
       return Event.find({}).sort({ createdAt: -1 })

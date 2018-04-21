@@ -1,6 +1,4 @@
-
-
-export default`
+export default `
   scalar Date
   type User {
     _id: ID!
@@ -22,6 +20,23 @@ export default`
     description: String
     created_at: Date
     updated_at: Date    
+  }
+  type Request {
+    _id: ID!
+    senderUser: User
+    group: Group
+    event: Event
+    receiverUser: User
+    url: String
+    created_at: Date
+    updated_at: Date    
+  }
+  input RequestInput {
+    senderUser: String
+    group: String
+    event: String
+    receiverUser: String
+    url: String
   }
   type Event {
     _id: ID!
@@ -74,11 +89,14 @@ export default`
   type Query {
     getPhotoComments: [PhotoComment]
     getEvents: [Event]
+    getRequests: [Request]
+    getRequest(_id: ID!): Request
     getGroups: [Group]
     getGroup(_id: ID!): Group
     getComments: [Comment]
     getEvent(_id: ID!): Event
     getProfile(_id: ID!): Profile
+    userSearch(params: String!): [User]
     me: Me
    
     getPhotos: [Photo]
@@ -89,6 +107,9 @@ export default`
     deletePhotoComment(_id: ID!): PhotoComment
     addPhotoComment(name:String!, photo: String): PhotoComment
     addGroup(title: String!, description: String): Group
+    
+    
+    addRequest(input: RequestInput): Boolean
 
     addEvent(title: String!, description: String,  group: ID, status: Int): Event
     addComment(text:String!, postId: Int): Comment
