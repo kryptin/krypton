@@ -19,10 +19,18 @@ export default {
       throw error;
     }
   },
+  getGroupByUser: async (_, { _id }, { user }) => {
+    try {
+      await requireAuth(user);
+      return Group.findOne({user:user._id})
+    } catch (error) {
+      throw error;
+    }
+  },
 
   addGroup: async (_, args, { user }) => {
     try {
-      //await requireAuth(user);
+      await requireAuth(user);
       const duserid = user? user._id: user;
       return Group.create({ ...args, user: duserid });
     } catch (error) {

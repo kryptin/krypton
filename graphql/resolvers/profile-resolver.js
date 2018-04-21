@@ -3,20 +3,20 @@ import { requireAuth } from '../../services/auth';
 
 export default {
 
-  getProfile: async (_, {_id}, { user }) => {
+  getProfile: async (_, args, { user }) => {
     try {
       await requireAuth(user);
-      return Profile.findById(_id);
+      return Profile.findOne({user:user._id})
     } catch (error) {
       throw error;
     }
   },
 
-  addProfile: async (_, args, { user }) => {
+  addProfile: async (_, {input}, { user }) => {
     try {
       await requireAuth(user);
       const duserid = user? user._id: user;
-      return Profile.create({ ...args, user: duserid });
+      return Profile.create({ ...input, user: duserid });
     } catch (error) {
       throw error;
     }

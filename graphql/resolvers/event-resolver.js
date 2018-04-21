@@ -19,11 +19,22 @@ export default {
       throw error;
     }
   },
-  addEvent: async (_, args, { user }) => {
+
+  getEventByGroup: async (_, {group}, { user }) => {
     try {
-      console.log(args);
-      //await requireAuth(user);
-      return Event.create({ ...args/*, user: user._id*/ });
+      await requireAuth(user);
+      // console.log("THE ID: "+_id);
+      return Event.findOne({group })
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  addEvent: async (_, {input}, { user }) => {
+    try {
+     await requireAuth(user);
+      const duserid = user? user._id: user;
+      return Event.create({ ...input, user: duserid });
     } catch (error) {
       throw error;
     }

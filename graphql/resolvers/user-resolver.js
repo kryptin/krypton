@@ -4,7 +4,8 @@ import { requireAuth } from '../../services/auth';
 export default {
   signup: async (_, args) => {
     try {
-      const user = await User.create(args); console.log('user: ',user);
+      const user = await User.create(args); 
+      //console.log('user: ',user);
       return {
         token: user.createToken(),
       };
