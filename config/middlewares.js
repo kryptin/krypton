@@ -16,14 +16,15 @@ import {environment} from "./index";
 
 async function auth(req, res, next) {// console.log(JSON.stringify(req.headers,null, 4));
     try {
-        const token = req.headers.authorization; console.log('token on the server'); console.log(token)
+        const token = req.headers.authorization;
+        console.log('token on the server');
+        console.log(token)
         if (token != null) {
             const user = await decodeToken(token);
             req.user = user;
         } else {
             req.user = null;
         }
-        console.log('br next')
         return next();
     } catch (error) {
         throw error;
@@ -33,7 +34,7 @@ async function auth(req, res, next) {// console.log(JSON.stringify(req.headers,n
 const schema = makeExecutableSchema({
     typeDefs,
     resolvers,
-  });
+});
 
 export default app => {
     app.use(cors());
@@ -51,6 +52,12 @@ export default app => {
             schema,
             context: {
                 user: req.user
+            },
+            formatError: err => {
+                if (err.originalError && err.originalError.error_message) {
+                    err.message = err.originalError.error_message;
+                }
+                return err;
             }
         })),
     );
@@ -58,20 +65,20 @@ export default app => {
 }
 
 
-       /*
-      
+/*
+
 app.use(auth);
-    app.use(
-        constants.GRAPHQL_PATH,
-        graphqlHTTP((request, response, graphQLParams) => ({
-            schema: schema,
-            pretty: true,
-            graphiql: ((environment.match('development')) ? true : false),
-            context: {
-                request: request,
-                test: 'Example context value'
-            }
-        }))
-    );
+app.use(
+ constants.GRAPHQL_PATH,
+ graphqlHTTP((request, response, graphQLParams) => ({
+     schema: schema,
+     pretty: true,
+     graphiql: ((environment.match('development')) ? true : false),
+     context: {
+         request: request,
+         test: 'Example context value'
+     }
+ }))
+);
 }
 */

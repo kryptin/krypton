@@ -4,9 +4,11 @@ import EventResolvers from './event-resolver';
 import CommentResolvers from './comment-resolver';
 import UserResolvers from './user-resolver';
 import ProfileResolvers from './profile-resolver';
-import PhotoResolvers from './photo-resolver';
+import RequestResolvers from './request-resolver';
 import User from '../../models/user';
 import Group from '../../models/group';
+import Event from '../../models/event';
+import PhotoResolvers from './photo-resolver';
 import Photo from '../../models/photo';
 
 export default {
@@ -14,20 +16,38 @@ export default {
     Group: {
         user: ({user}) => User.findById(user),
     },
+    Request: {
+        senderUser: ({user}) => User.findById(user),
+        receiverUser: ({user}) => User.findById(user),
+        group: ({group}) => Group.findById(group),
+        event: ({event}) => Event.findById(event),
+    },
     Query: {
         getGroups: GroupResolvers.getGroups,
         getGroup: GroupResolvers.getGroup,
+
+        getRequests: RequestResolvers.getRequests,
+        getRequest: RequestResolvers.getRequest,
+
+
         getEvents: EventResolvers.getEvents,
         getEvent: EventResolvers.getEvent,
         getComments: CommentResolvers.getComments,
         getProfile: ProfileResolvers.getProfile,
+
+
         me: UserResolvers.me,
+        userSearch: UserResolvers.userSearch,
         //for photo
         getPhotos: PhotoResolvers.getPhotos,
-        getPhoto: PhotoResolvers.getPhoto,     
+        getPhoto: PhotoResolvers.getPhoto,
     },
     Mutation: {
         addGroup: GroupResolvers.addGroup,
+
+        addRequest: RequestResolvers.addRequest,
+
+
         addEvent: EventResolvers.addEvent,
         addComment: CommentResolvers.addComment,
         addProfile: ProfileResolvers.addProfile,
@@ -43,7 +63,7 @@ export default {
     // I must use dataloader on this later
 
     Event: {
-        group: ({ group }) => Group.findById(group),
-      },
-    
+        group: ({group}) => Group.findById(group),
+    },
+
 }
