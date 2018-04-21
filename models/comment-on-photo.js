@@ -2,14 +2,15 @@ import mongoose, { Schema } from 'mongoose';
 
 
 var photoCommentSchema = new Schema({
-    photoID: {
-        type: mongoose.Schema.Types.ObjectId,
-        required:true
-    },
-    text: {
+    name: {
         type: String,
         required: true
-    }
+    },
+    photo: {
+        type: Schema.Types.ObjectId,
+        ref: 'Photo'
+    },
 });
 
 export default mongoose.model('PhotoComment', photoCommentSchema);
+
