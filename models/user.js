@@ -1,5 +1,5 @@
-import mongoose, { Schema } from 'mongoose';
-import { hashSync, compareSync } from 'bcrypt-nodejs';
+import mongoose, {Schema} from 'mongoose';
+import {hashSync, compareSync} from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 
 import constants from '../config/constants'
@@ -14,7 +14,10 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: String,
+    email: {
+        type: String,
+        unique: true,
+    },
     created_at: Date,
     updated_at: Date
 });

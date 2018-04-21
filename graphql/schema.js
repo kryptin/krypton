@@ -1,6 +1,4 @@
-
-
-export default`
+export default `
   scalar Date
   type User {
     _id: ID!
@@ -24,6 +22,23 @@ export default`
     description: String
     created_at: Date
     updated_at: Date    
+  }
+  type Request {
+    _id: ID!
+    senderUser: User
+    group: Group
+    event: Event
+    receiverUser: User
+    url: String
+    created_at: Date
+    updated_at: Date    
+  }
+  input RequestInput {
+    senderUser: String
+    group: String
+    event: String
+    receiverUser: String
+    url: String
   }
   type Event {
     _id: ID!
@@ -51,12 +66,35 @@ export default`
     location: String
     image_path: String
   }
+  type Like{
+    _id: String
+    like: String
+  }
+  
+  type Photo{
+    _id: String
+    url: String
+    user: User
+    event: Event
+    likes: [Like]
+    comments: [Comment]
+  }
   
   type Status {
     message: String!
   }
+  type PhotoComment {
+    _id: String
+    name: String
+    type: String
+    photo: Photo
+  }
+
   type Query {
+    getPhotoComments: [PhotoComment]
     getEvents: [Event]
+    getRequests: [Request]
+    getRequest(_id: ID!): Request
     getGroups: [Group]
     getGroup(_id: ID!): Group
     getGroupByUser: Group,
@@ -66,7 +104,12 @@ export default`
     getEvent(_id: ID!): Event
     getEventByGroup(group: ID!): Event
     getProfile: Profile
+    userSearch(params: String!): [User]
     me: Me
+   
+    getPhotos: [Photo]
+    getPhoto(_id: ID!): Photo     
+
   }
 
 
@@ -87,7 +130,12 @@ export default`
   }
 
   type Mutation {
+    deletePhotoComment(_id: ID!): PhotoComment
+    addPhotoComment(name:String!, photo: String): PhotoComment
     addGroup(title: String!, description: String): Group
+    
+    
+    addRequest(input: RequestInput): Boolean
 
     addEvent(input: EventInput): Event
     addComment(text:String!, postId: Int): Comment
@@ -99,6 +147,11 @@ export default`
 
     signup(email: String!, password: String!, username: String): Auth
     login(email: String!, password: String!): Auth
+
+    addPhoto(url:String!, user: ID, event: ID, likes: ID, comments: ID): Photo
+    updatePhoto(url:String!, user: ID, event: ID, likes: ID, comments: ID): Photo
+    deletePhoto(_id: ID!): Status
+
   }
 
   schema {
