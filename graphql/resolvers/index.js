@@ -4,13 +4,20 @@ import EventResolvers from './event-resolver';
 import CommentResolvers from './comment-resolver';
 import UserResolvers from './user-resolver';
 import ProfileResolvers from './profile-resolver';
+import PhotoResolvers from './photo-resolver';
 import User from '../../models/user';
+import Group from '../../models/group';
+import Photo from '../../models/photo';
+import PhotoComment from '../../models/comment-on-photo';
 import PhotoCommentResolvers from './comment-on-photo-resolver';
 
 export default {
     Date: GraphQLDate,
     Group: {
         user: ({user}) => User.findById(user),
+    },
+    PhotoComment: {
+        photo: ({photo}) => photo.findById(photo),
     },
     Query: {
         getPhotoComments: PhotoCommentResolvers.getPhotoComments,
@@ -21,9 +28,13 @@ export default {
         getComments: CommentResolvers.getComments,
         getProfile: ProfileResolvers.getProfile,
         me: UserResolvers.me,
+        //for photo
+        getPhotos: PhotoResolvers.getPhotos,
+        getPhoto: PhotoResolvers.getPhoto,     
     },
     Mutation: {
-        //addPhotoComment: PhotoCommentResolvers.addPhotoComment,
+        deletePhotoComment: PhotoCommentResolvers.deletePhotoComment,
+        addPhotoComment: PhotoCommentResolvers.addPhotoComment,
         addGroup: GroupResolvers.addGroup,
         addEvent: EventResolvers.addEvent,
         addComment: CommentResolvers.addComment,
@@ -31,5 +42,16 @@ export default {
         updateProfile: ProfileResolvers.updateProfile,
         signup: UserResolvers.signup,
         login: UserResolvers.login,
-    }
+        //for photo
+        addPhoto: PhotoResolvers.addPhoto,
+        updatePhoto: PhotoResolvers.updatePhoto,
+        deletePhoto: PhotoResolvers.deletePhoto,
+    },
+    //so as to populate Event with Group
+    // I must use dataloader on this later
+
+    Event: {
+        group: ({ group }) => Group.findById(group),
+      },
+    
 }

@@ -47,6 +47,20 @@ export default`
     location: String
     image_path: String
   }
+  type Like{
+    _id: String
+    like: String
+  }
+  
+  type Photo{
+    _id: String
+    url: String
+    user: User
+    event: Event
+    likes: [Like]
+    comments: [Comment]
+  }
+  
   type Status {
     message: String!
   }
@@ -54,6 +68,7 @@ export default`
     _id: String
     name: String
     type: String
+    photo: Photo
   }
 
   type Query {
@@ -65,8 +80,14 @@ export default`
     getEvent(_id: ID!): Event
     getProfile(_id: ID!): Profile
     me: Me
+   
+    getPhotos: [Photo]
+    getPhoto(_id: ID!): Photo     
+
   }
   type Mutation {
+    deletePhotoComment(_id: ID!): PhotoComment
+    addPhotoComment(name:String!, photo: String): PhotoComment
     addGroup(title: String!, description: String): Group
 
     addEvent(title: String!, description: String,  group: ID, status: Int): Event
@@ -79,6 +100,11 @@ export default`
 
     signup(email: String!, password: String!, username: String): Auth
     login(email: String!, password: String!): Auth
+
+    addPhoto(url:String!, user: ID, event: ID, likes: ID, comments: ID): Photo
+    updatePhoto(url:String!, user: ID, event: ID, likes: ID, comments: ID): Photo
+    deletePhoto(_id: ID!): Status
+
   }
 
   schema {
