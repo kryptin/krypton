@@ -50,8 +50,14 @@ export default`
   type Status {
     message: String!
   }
+  type PhotoComment {
+    _id: String
+    name: String
+    type: String
+  }
 
   type Query {
+    getPhotoComments: [PhotoComment]
     getEvents: [Event]
     getGroups: [Group]
     getGroup(_id: ID!): Group

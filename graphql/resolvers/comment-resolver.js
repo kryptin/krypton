@@ -11,6 +11,7 @@ export default {
       throw error;
     }
   },
+  
   addComment: async (_, args, { user }) => {
     try {
       await requireAuth(user);
