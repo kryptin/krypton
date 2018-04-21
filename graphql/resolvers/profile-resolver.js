@@ -5,8 +5,7 @@ export default {
 
   getProfile: async (_, {_id}, { user }) => {
     try {
-      //await requireAuth(user);
-      // return Profile.findOne({ _id, user: user._id });
+      await requireAuth(user);
       return Profile.findById(_id);
     } catch (error) {
       throw error;
@@ -15,7 +14,7 @@ export default {
 
   addProfile: async (_, args, { user }) => {
     try {
-      //await requireAuth(user);
+      await requireAuth(user);
       const duserid = user? user._id: user;
       return Profile.create({ ...args, user: duserid });
     } catch (error) {

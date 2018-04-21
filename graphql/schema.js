@@ -62,6 +62,20 @@ export default `
     location: String
     image_path: String
   }
+  type Like{
+    _id: String
+    like: String
+  }
+  
+  type Photo{
+    _id: String
+    url: String
+    user: User
+    event: Event
+    likes: [Like]
+    comments: [Comment]
+  }
+  
   type Status {
     message: String!
   }
@@ -76,6 +90,10 @@ export default `
     getEvent(_id: ID!): Event
     getProfile(_id: ID!): Profile
     me: Me
+   
+    getPhotos: [Photo]
+    getPhoto(_id: ID!): Photo     
+
   }
   type Mutation {
     addGroup(title: String!, description: String): Group
@@ -93,6 +111,11 @@ export default `
 
     signup(email: String!, password: String!, username: String): Auth
     login(email: String!, password: String!): Auth
+
+    addPhoto(url:String!, user: ID, event: ID, likes: ID, comments: ID): Photo
+    updatePhoto(url:String!, user: ID, event: ID, likes: ID, comments: ID): Photo
+    deletePhoto(_id: ID!): Status
+
   }
 
   schema {
