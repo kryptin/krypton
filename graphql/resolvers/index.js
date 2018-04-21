@@ -18,16 +18,14 @@ export default {
     Group: {
         user: ({user}) => User.findById(user),
     },
-<<<<<<< HEAD
     PhotoComment: {
         photo: ({photo}) => photo.findById(photo),
-=======
+    },
     Request: {
         senderUser: ({user}) => User.findById(user),
         receiverUser: ({user}) => User.findById(user),
         group: ({group}) => Group.findById(group),
         event: ({event}) => Event.findById(event),
->>>>>>> a05b7f3b4e3371f8cf91e68b2e845820cd32984a
     },
     Query: {
         getPhotoComments: PhotoCommentResolvers.getPhotoComments,
