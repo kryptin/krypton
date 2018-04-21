@@ -8,7 +8,7 @@
         "url": "https://github.com/bruno12mota/graphql-nodejs"
     },
     "scripts": {
-        "start": "index.js"
+        "start": "nodemon index.js"
     },
     "dependencies": {
         "apollo-server-express": "^1.3.2",
