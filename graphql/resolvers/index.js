@@ -1,12 +1,15 @@
 import GraphQLDate from 'graphql-date';
 import GroupResolvers from './group-resolver';
+import GroupMemberResolvers from './group-member-resolver';
 import EventResolvers from './event-resolver';
+import EventMemberResolvers from './event-member-resolver';
 import CommentResolvers from './comment-resolver';
 import UserResolvers from './user-resolver';
 import ProfileResolvers from './profile-resolver';
 import RequestResolvers from './request-resolver';
 import User from '../../models/user';
 import Group from '../../models/group';
+import GroupMember from '../../models/group-member';
 import Event from '../../models/event';
 import PhotoResolvers from './photo-resolver';
 import Photo from '../../models/photo';
@@ -16,6 +19,17 @@ import PhotoCommentResolvers from './comment-on-photo-resolver';
 export default {
     Date: GraphQLDate,
     Group: {
+        user: ({user}) => User.findById(user),
+        event: ({event}) => Event.findById(event),
+    },
+    GroupMember: {
+        user: ({user}) => User.findById(user),
+        group: ({group}) => Group.findById(group),
+    },
+    Event: {
+        group: ({group}) => Group.findById(group),
+    },
+    EventMember: {
         user: ({user}) => User.findById(user),
         event: ({event}) => Event.findById(event),
     },
@@ -37,6 +51,7 @@ export default {
     },
     Query: {
         getPhotoComments: PhotoCommentResolvers.getPhotoComments,
+
         getGroups: GroupResolvers.getGroups,
         getGroup: GroupResolvers.getGroup,
         getGroupByUser: GroupResolvers.getGroupByUser,
@@ -60,12 +75,16 @@ export default {
     Mutation: {
         deletePhotoComment: PhotoCommentResolvers.deletePhotoComment,
         addPhotoComment: PhotoCommentResolvers.addPhotoComment,
+        
         addGroup: GroupResolvers.addGroup,
+        addGroupMember: GroupMemberResolvers.addGroupMember,
+
 
         addRequest: RequestResolvers.addRequest,
 
-
         addEvent: EventResolvers.addEvent,
+        addEventMember: EventMemberResolvers.addEventMember,
+
         addComment: CommentResolvers.addComment,
         addProfile: ProfileResolvers.addProfile,
         updateProfile: ProfileResolvers.updateProfile,
@@ -78,9 +97,5 @@ export default {
     },
     //so as to populate Event with Group
     // I must use dataloader on this later
-
-    Event: {
-        group: ({group}) => Group.findById(group),
-    },
 
 }

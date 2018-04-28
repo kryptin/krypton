@@ -1,4 +1,4 @@
-export default `
+export default`
   scalar Date
   type User {
     _id: ID!
@@ -23,6 +23,14 @@ export default `
     created_at: Date
     updated_at: Date    
   }
+  type GroupMember {
+    _id: ID!
+    user: User
+    group: Group
+    user_type:String
+    created_at: Date
+    updated_at: Date    
+  }
   type Request {
     _id: ID!
     senderUser: User
@@ -33,13 +41,7 @@ export default `
     created_at: Date
     updated_at: Date    
   }
-  input RequestInput {
-    senderUser: String
-    group: String
-    event: String
-    receiverUser: String
-    url: String
-  }
+ 
   type Event {
     _id: ID!
     title: String
@@ -48,6 +50,14 @@ export default `
     status: Int
     created_at: Date
     updated_at: Date
+  }
+  type EventMember {
+    _id: ID!
+    user: User
+    event: Event
+    user_type:String
+    created_at: Date
+    updated_at: Date    
   }
  
   type Comment {
@@ -61,7 +71,6 @@ export default `
     last_name: String
     country: String
     user: User
-    group: Group
     state: String
     location: String
     image_path: String
@@ -112,13 +121,14 @@ export default `
 
   }
 
-
-  input EventInput {
-    title: String
+  input RequestInput {
+    senderUser: String
     group: String
-    description: String
-    status: Int
+    event: String
+    receiverUser: String
+    url: String
   }
+
   input ProfileInput{
     first_name: String
     last_name: String
@@ -133,11 +143,13 @@ export default `
     deletePhotoComment(_id: ID!): PhotoComment
     addPhotoComment(name:String!, photo: String): PhotoComment
     addGroup(title: String!, description: String): Group
-    
+    addGroupMember(group: String!, user: String!): GroupMember
     
     addRequest(input: RequestInput): Boolean
 
-    addEvent(input: EventInput): Event
+    addEvent(group: String!, title: String!, description: String): Event
+    addEventMember(event: String!, user: String!): EventMember
+
     addComment(text:String!, postId: Int): Comment
     updateEvent(_id: ID!, name: String): Event
     deleteEvent(_id: ID!): Status

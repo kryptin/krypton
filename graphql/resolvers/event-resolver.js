@@ -1,4 +1,5 @@
 import Event from '../../models/event';
+import EventMember from '../../models/event-member';
 import { requireAuth } from '../../services/auth';
 
 export default {
@@ -32,11 +33,18 @@ export default {
     }
   },
 
-  addEvent: async (_, {input}, { user }) => {
+  addEvent: async (_, args, { user }) => {
     try {
      await requireAuth(user);
       const duserid = user? user._id: user;
-      return Event.create({ ...input, user: duserid });
+      var event = new Event({ ...args, user: duserid  });
+      event.save(function (err) {
+        if (err) return handleError(err);
+        // saved!
+      });
+      EventMember.create({ event: event._id, user: duserid, user_type:"Admin" });
+      return event;
+
     } catch (error) {
       throw error;
     }
