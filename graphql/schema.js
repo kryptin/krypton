@@ -71,6 +71,10 @@ export default`
     last_name: String
     country: String
     user: User
+    groupMember: [GroupMember] 
+    eventMember: [EventMember]
+    group: [Group] 
+    event: Event
     state: String
     location: String
     image_path: String

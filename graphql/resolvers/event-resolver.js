@@ -37,7 +37,7 @@ export default {
     try {
      await requireAuth(user);
       const duserid = user? user._id: user;
-      var event = new Event({ ...args, user: duserid  });
+      var event = new Event({ ...args, user: duserid});
       event.save(function (err) {
         if (err) return handleError(err);
         // saved!

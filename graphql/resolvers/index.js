@@ -11,6 +11,7 @@ import User from '../../models/user';
 import Group from '../../models/group';
 import GroupMember from '../../models/group-member';
 import Event from '../../models/event';
+import EventMember from '../../models/event-member';
 import PhotoResolvers from './photo-resolver';
 import Photo from '../../models/photo';
 import PhotoComment from '../../models/comment-on-photo';
@@ -21,6 +22,7 @@ export default {
     Group: {
         user: ({user}) => User.findById(user),
         event: ({event}) => Event.findById(event),
+        // eventInGroup: ({group}) => Event.find({group:"5ae4e9d4e08d44277015f14d"}),
     },
     GroupMember: {
         user: ({user}) => User.findById(user),
@@ -38,7 +40,8 @@ export default {
     },
     Profile: {
         user: ({user}) => User.findById(user),
-        //group: ({group}) => Group.findById(group),
+        groupMember: ({user}) => GroupMember.find({user}),
+        eventMember: ({user}) => EventMember.find({user}),
     },
     PhotoComment: {
         photo: ({photo}) => photo.findById(photo),
