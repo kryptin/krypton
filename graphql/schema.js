@@ -19,6 +19,7 @@ export default`
     title: String
     user: User
     event: [Event]
+    groupMember :[GroupMember]
     description: String
     created_at: Date
     updated_at: Date    
@@ -27,6 +28,7 @@ export default`
     _id: ID!
     user: User
     group: Group
+    member: [Group]
     user_type:String
     created_at: Date
     updated_at: Date    

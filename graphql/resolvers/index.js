@@ -27,6 +27,7 @@ export default {
     GroupMember: {
         user: ({user}) => User.findById(user),
         group: ({group}) => Group.findById(group),
+        member: ({group}) => GroupMember.find({group}),
     },
     Event: {
         group: ({group}) => Group.findById(group),
