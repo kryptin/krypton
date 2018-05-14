@@ -1,12 +1,25 @@
 import User from '../../models/user';
 import {requireAuth} from '../../services/auth';
+import Profile from "../../models/profile";
+import Group from "../../models/group";
+import GroupMember from "../../models/group-member";
 import Event from "../../models/event";
+import EventMember from "../../models/event-member";
+
 
 export default {
     signup: async (_, args) => {
         try {
             const user = await User.create(args);
-            console.log('user: ', user);
+            const duserid = user? user._id: user;
+
+            Profile.create({ user: duserid, country:"Nigeria" });
+            const group = await Group.create({ title: "Family", description:"Keep family events organised here", user: duserid, user_type:"Admin" });
+            const groupMember = await GroupMember.create({ group: group._id, user: duserid, user_type:"Admin" });
+
+            const event = await Event.create({ group: group._id,  title: "My Birthday", description:"Celebrating Life", user: duserid, user_type:"Admin" });
+            const eventMember = await EventMember.create({ event: event._id, user: duserid, user_type:"Admin" });
+
             return {
                 token: user.createToken(),
             };

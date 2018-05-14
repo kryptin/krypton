@@ -71,6 +71,9 @@ export default`
     _id: String
     first_name: String
     last_name: String
+    bio: String
+    sex: String
+    date_of_birth: String
     country: String
     user: User
     groupMember: [GroupMember] 
@@ -161,7 +164,7 @@ export default`
     deleteEvent(_id: ID!): Status
 
     addProfile(input: ProfileInput): Profile
-    updateProfile(first_name:String!, last_name:String!, country: String!, state: String!, image_path:String): Profile
+    updateProfile(first_name:String!, last_name:String!, country: String, state: String, sex:String!, bio:String!, date_of_birth:String!, image_path:String): Profile
 
     signup(email: String!, password: String!, username: String): Auth
     login(email: String!, password: String!): Auth

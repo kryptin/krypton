@@ -7,7 +7,8 @@ export default {
   getGroups: async (_, args, { user }) => {
     try {
       //await requireAuth(user);
-      return Group.find({}).sort({ createdAt: -1 })
+        const duserid = user? user._id: user;
+        return Group.find({user:duserid}).sort({ createdAt: -1 })
     } catch (error) {
       throw error;
     }

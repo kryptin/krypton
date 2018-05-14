@@ -27,8 +27,9 @@ export default {
   
   updateProfile: async (_, args, { user }) => {
     try {
-      await requireAuth(user);
-      return Profile.update({ ...args, user: user._id });
+        await requireAuth(user);
+        const duserid = user? user._id: user;
+        return Profile.update({ ...args, user: duserid });
     } catch (error) {
       throw error;
     }
