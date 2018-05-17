@@ -21,13 +21,13 @@ export default {
     Date: GraphQLDate,
     Group: {
         user: ({user}) => User.findById(user),
-        event: ({event}) => Event.findById(event),
-        // eventInGroup: ({group}) => Event.find({group:"5ae4e9d4e08d44277015f14d"}),
+        //event: ({event}) => Event.findById(event), 
+        event: ({_id}) => Event.find({group: _id}),
     },
     GroupMember: {
         user: ({user}) => User.findById(user),
         group: ({group}) => Group.findById(group),
-        member: ({group}) => GroupMember.find({group}),
+        member: ({group}) => GroupMember.find({group: group}),
     },
     Event: {
         group: ({group}) => Group.findById(group),
@@ -41,8 +41,8 @@ export default {
     },
     Profile: {
         user: ({user}) => User.findById(user),
-        groupMember: ({user}) => GroupMember.find({user}),
-        eventMember: ({user}) => EventMember.find({user}),
+        groupMember: ({user}) => GroupMember.find({user: user}),
+        eventMember: ({user}) => EventMember.find({user: user}),
     },
     PhotoComment: {
         photo: ({photo}) => photo.findById(photo),
@@ -59,6 +59,9 @@ export default {
         getGroups: GroupResolvers.getGroups,
         getGroup: GroupResolvers.getGroup,
         getGroupByUser: GroupResolvers.getGroupByUser,
+
+
+        getUserGroups: GroupMemberResolvers.getUserGroups,
 
         getRequests: RequestResolvers.getRequests,
         getRequest: RequestResolvers.getRequest,

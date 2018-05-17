@@ -19,6 +19,7 @@ export default`
     title: String
     user: User
     event: [Event]
+    groupEvent :[Event]
     groupMember :[GroupMember]
     description: String
     created_at: Date
@@ -113,10 +114,12 @@ export default`
     getEvents: [Event]
     getRequests: [Request]
     getRequest(_id: ID!): Request
+    
     getGroups: [Group]
     getGroup(_id: ID!): Group
-    getGroupByUser: Group,
-
+    getGroupByUser: Group
+    getUserGroups: [GroupMember]
+    
     getComments: [Comment]
 
     getEvent(_id: ID!): Event
