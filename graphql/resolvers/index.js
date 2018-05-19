@@ -21,7 +21,6 @@ export default {
     Date: GraphQLDate,
     Group: {
         user: ({user}) => User.findById(user),
-        //event: ({event}) => Event.findById(event), 
         event: ({_id}) => Event.find({group: _id}),
     },
     GroupMember: {
@@ -58,9 +57,6 @@ export default {
 
         getGroups: GroupResolvers.getGroups,
         getGroup: GroupResolvers.getGroup,
-        getGroupByUser: GroupResolvers.getGroupByUser,
-
-
         getUserGroups: GroupMemberResolvers.getUserGroups,
 
         getRequests: RequestResolvers.getRequests,
@@ -70,6 +66,9 @@ export default {
         getEvents: EventResolvers.getEvents,
         getEvent: EventResolvers.getEvent,
         getEventByGroup: EventResolvers.getEventByGroup,
+
+        getEventMembers: EventMemberResolvers.getEventMembers,
+
         getComments: CommentResolvers.getComments,
         getProfile: ProfileResolvers.getProfile,
 

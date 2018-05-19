@@ -26,7 +26,6 @@ export default {
   getEventByGroup: async (_, {group}, { user }) => {
     try {
       await requireAuth(user);
-      // console.log("THE ID: "+_id);
       return Event.findOne({group })
     } catch (error) {
       throw error;

@@ -51,6 +51,7 @@ export default`
     group: Group
     description: String
     status: Int
+    e_type: String
     created_at: Date
     updated_at: Date
   }
@@ -117,13 +118,14 @@ export default`
     
     getGroups: [Group]
     getGroup(_id: ID!): Group
-    getGroupByUser: Group
     getUserGroups: [GroupMember]
     
     getComments: [Comment]
 
     getEvent(_id: ID!): Event
     getEventByGroup(group: ID!): Event
+    getEventMembers: [EventMember]
+
     getProfile: Profile
     userSearch(params: String!): [User]
     me: Me
@@ -159,7 +161,7 @@ export default`
     
     addRequest(input: RequestInput): Boolean
 
-    addEvent(group: String!, title: String!, description: String): Event
+    addEvent(group: String!, title: String!, description: String,e_type: String!): Event
     addEventMember(event: String!, user: String!): EventMember
 
     addComment(text:String!, postId: Int): Comment

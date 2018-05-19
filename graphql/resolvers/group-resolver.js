@@ -22,24 +22,6 @@ export default {
     }
   },
 
-  // getGroup: async (_, { _id }, { user }) => {
-  //     try {
-  //         // await requireAuth(user);
-  //         const group = await  Group.findById(_id);
-  //         return Group.findById(_id);
-  //     } catch (error) {
-  //         throw error;
-  //     }
-  // },
-  getGroupByUser: async (_, { _id }, { user }) => {
-    try {
-      await requireAuth(user);
-      return Group.findOne({user:user._id})
-    } catch (error) {
-      throw error;
-    }
-  },
-
   addGroup: async (_, args, { user }) => {
     try {
       await requireAuth(user);
