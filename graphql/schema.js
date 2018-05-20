@@ -5,6 +5,7 @@ export default`
     username: String
     email: String!
     group: Group
+    profile: Profile
   }
   type Auth {
     token: String!
@@ -49,6 +50,7 @@ export default`
     _id: ID!
     title: String
     group: Group
+    eventMember: [EventMember]
     description: String
     status: Int
     e_type: String

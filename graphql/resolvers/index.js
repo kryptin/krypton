@@ -12,6 +12,7 @@ import Group from '../../models/group';
 import GroupMember from '../../models/group-member';
 import Event from '../../models/event';
 import EventMember from '../../models/event-member';
+import Profile from '../../models/profile';
 import PhotoResolvers from './photo-resolver';
 import Photo from '../../models/photo';
 import PhotoComment from '../../models/comment-on-photo';
@@ -30,6 +31,7 @@ export default {
     },
     Event: {
         group: ({group}) => Group.findById(group),
+        eventMember: ({_id}) => EventMember.find({event: _id}),
     },
     EventMember: {
         user: ({user}) => User.findById(user),
@@ -37,6 +39,7 @@ export default {
     },
     User: {
         group: ({group}) => Group.findById(group),
+        profile: ({_id}) => Profile.findOne({user:_id}),
     },
     Profile: {
         user: ({user}) => User.findById(user),
@@ -61,7 +64,6 @@ export default {
 
         getRequests: RequestResolvers.getRequests,
         getRequest: RequestResolvers.getRequest,
-
 
         getEvents: EventResolvers.getEvents,
         getEvent: EventResolvers.getEvent,
