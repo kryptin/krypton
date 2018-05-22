@@ -21,39 +21,40 @@ import PhotoCommentResolvers from './comment-on-photo-resolver';
 export default {
     Date: GraphQLDate,
     Group: {
-        user: ({user}) => User.findById(user),
-        event: ({_id}) => Event.find({group: _id}),
+        user: ({ user }) => User.findById(user),
+        event: ({ _id }) => Event.find({ group: _id }),
     },
     GroupMember: {
-        user: ({user}) => User.findById(user),
-        group: ({group}) => Group.findById(group),
-        member: ({group}) => GroupMember.find({group: group}),
+        user: ({ user }) => User.findById(user),
+        group: ({ group }) => Group.findById(group),
+        member: ({ group }) => GroupMember.find({ group: group }),
     },
     Event: {
-        group: ({group}) => Group.findById(group),
-        eventMember: ({_id}) => EventMember.find({event: _id}),
+        group: ({ group }) => Group.findById(group),
+        eventMember: ({ _id }) => EventMember.find({ event: _id }),
     },
     EventMember: {
-        user: ({user}) => User.findById(user),
-        event: ({event}) => Event.findById(event),
+        user: ({ user }) => User.findById(user),
+        event: ({ event }) => Event.findById(event),
     },
     User: {
-        group: ({group}) => Group.findById(group),
-        profile: ({_id}) => Profile.findOne({user:_id}),
+        group: ({ group }) => Group.findById(group),
+        profile: ({ _id }) => Profile.findOne({ user: _id }),
     },
     Profile: {
-        user: ({user}) => User.findById(user),
-        groupMember: ({user}) => GroupMember.find({user: user}),
-        eventMember: ({user}) => EventMember.find({user: user}),
+        user: ({ user }) => User.findById(user),
+        groupMember: ({ user }) => GroupMember.find({ user: user }),
+        eventMember: ({ user }) => EventMember.find({ user: user }),
     },
     PhotoComment: {
-        photo: ({photo}) => photo.findById(photo),
+        photo: ({ photo }) => photo.findById(photo),
     },
     Request: {
-        senderUser: ({user}) => User.findById(user),
-        receiverUser: ({user}) => User.findById(user),
-        group: ({group}) => Group.findById(group),
-        event: ({event}) => Event.findById(event),
+        senderUser: ({ user }) => User.findById(user),
+        receiverUser: ({ user }) => User.findById(user),
+        group: ({ group }) => Group.findById(group),
+        event: ({ event }) => Event.findById(event),
+
     },
     Query: {
         getPhotoComments: PhotoCommentResolvers.getPhotoComments,
@@ -83,7 +84,7 @@ export default {
     Mutation: {
         deletePhotoComment: PhotoCommentResolvers.deletePhotoComment,
         addPhotoComment: PhotoCommentResolvers.addPhotoComment,
-        
+
         addGroup: GroupResolvers.addGroup,
         addGroupMember: GroupMemberResolvers.addGroupMember,
 
@@ -98,6 +99,7 @@ export default {
         updateProfile: ProfileResolvers.updateProfile,
         signup: UserResolvers.signup,
         login: UserResolvers.login,
+
         //for photo
         addPhoto: PhotoResolvers.addPhoto,
         updatePhoto: PhotoResolvers.updatePhoto,
