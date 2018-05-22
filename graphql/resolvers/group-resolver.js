@@ -1,4 +1,5 @@
 import Group from '../../models/group';
+import GroupMember from '../../models/group-member';
 import { requireAuth } from '../../services/auth';
 
 export default {
@@ -6,7 +7,8 @@ export default {
   getGroups: async (_, args, { user }) => {
     try {
       //await requireAuth(user);
-      return Group.find({}).sort({ createdAt: -1 })
+        const duserid = user? user._id: user;
+        return Group.find({user:duserid}).sort({ createdAt: -1 })
     } catch (error) {
       throw error;
     }
@@ -22,9 +24,17 @@ export default {
 
   addGroup: async (_, args, { user }) => {
     try {
-      //await requireAuth(user);
+      await requireAuth(user);
       const duserid = user? user._id: user;
-      return Group.create({ ...args, user: duserid });
+
+      var group = new Group({ ...args, user: duserid  });
+      group.save(function (err) {
+        if (err) return handleError(err);
+        // saved!
+      })
+      GroupMember.create({ group: group._id, user: duserid, user_type:"Admin" });
+
+      return group;
     } catch (error) {
       throw error;
     }

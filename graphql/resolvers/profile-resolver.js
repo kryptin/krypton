@@ -1,22 +1,25 @@
 import Profile from '../../models/profile';
+import Group from '../../models/group';
+import GroupMember from '../../models/group-member';
 import { requireAuth } from '../../services/auth';
 
 export default {
 
-  getProfile: async (_, {_id}, { user }) => {
+  getProfile: async (_, args, { user }) => {
     try {
       await requireAuth(user);
-      return Profile.findById(_id);
+      const duserid = user? user._id: user;
+      return Profile.findOne({user:user._id});
     } catch (error) {
       throw error;
     }
   },
 
-  addProfile: async (_, args, { user }) => {
+  addProfile: async (_, {input}, { user }) => {
     try {
       await requireAuth(user);
       const duserid = user? user._id: user;
-      return Profile.create({ ...args, user: duserid });
+      return Profile.create({ ...input, user: duserid });
     } catch (error) {
       throw error;
     }
@@ -24,8 +27,9 @@ export default {
   
   updateProfile: async (_, args, { user }) => {
     try {
-      await requireAuth(user);
-      return Profile.update({ ...args, user: user._id });
+        await requireAuth(user);
+        const duserid = user? user._id: user;
+        return Profile.update({ ...args, user: duserid });
     } catch (error) {
       throw error;
     }

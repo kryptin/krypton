@@ -11,10 +11,15 @@ var eventSchema = new mongoose.Schema({
     },
     group: {
         type: Schema.Types.ObjectId,
-        ref: 'Group'
+        ref: 'Group',
+        required: true
     },  
     status: {
         type: Number
+    },
+    e_type: {
+        type: String,
+        required: true
     },
     created_at: Date,
     updated_at: Date
