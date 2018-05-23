@@ -1,20 +1,21 @@
 /* eslint-disable no-param-reassign */
 
 import bodyParser from 'body-parser';
-import {graphiqlExpress, graphqlExpress} from 'apollo-server-express';
-import {makeExecutableSchema} from 'graphql-tools';
+import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
+import { makeExecutableSchema } from 'graphql-tools';
 //import graphqlHTTP from 'express-graphql';
 
 import constants from './constants';
-import {decodeToken} from '../services/auth';
+import { decodeToken } from '../services/auth';
 //import schema from '../graphql';
 import typeDefs from '../graphql/schema';
 import resolvers from '../graphql/resolvers';
 import cors from 'cors';
-import {environment} from "./index";
+import { environment } from "./index";
 
+console.log('middleware entry');
 
-async function auth(req, res, next) {// console.log(JSON.stringify(req.headers,null, 4));
+async function auth(req, res, next) { // console.log(JSON.stringify(req.headers,null, 4));
     try {
         const token = req.headers.authorization;
         console.log('token on the server');
