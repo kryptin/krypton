@@ -17,7 +17,7 @@ export default {
             const group = await Group.create({ title: "Family", description:"Keep family events organised here", user: duserid, user_type:"Admin" });
             const groupMember = await GroupMember.create({ group: group._id, user: duserid, user_type:"Admin" });
 
-            const event = await Event.create({ group: group._id,  title: "My Birthday", description:"Celebrating Life", user: duserid, user_type:"Admin" });
+            const event = await Event.create({ group: group._id,  title: "My Birthday", description:"Celebrating Life", user: duserid, user_type:"Admin", e_type:"Public" });
             const eventMember = await EventMember.create({ event: event._id, user: duserid, user_type:"Admin" });
 
             return {
