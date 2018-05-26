@@ -1,27 +1,23 @@
 import mongoose, { Schema } from 'mongoose';
 
 const photoSchema = new Schema({
-  url: String,
+  image_url: {
+      type: String,
+      required: true
+  },
+  description: String,
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   event: {
     type: Schema.Types.ObjectId,
-    ref: 'Event'
+    ref: 'Event',
+    required: true
   },
-  likes: {
-    type: Schema.Types.ObjectId,
-    ref: 'Event'
-  },
-  comments: {
-    type: Schema.Types.ObjectId,
-    ref: 'Comment'
-  },
-
  
 }, { timestamps: true });
-
 
 
 export default mongoose.model('Photo', photoSchema);

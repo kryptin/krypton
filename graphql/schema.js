@@ -4,6 +4,7 @@ export default`
     _id: ID!
     username: String
     email: String!
+    image_path: String!
     group: Group
     profile: Profile
   }
@@ -51,6 +52,7 @@ export default`
     title: String
     group: Group
     eventMember: [EventMember]
+    photo : [Photo]
     description: String
     status: Int
     e_type: String
@@ -61,6 +63,7 @@ export default`
     _id: ID!
     user: User
     event: Event
+    photo: [Photo]
     user_type:String
     created_at: Date
     updated_at: Date    
@@ -91,15 +94,16 @@ export default`
   type Like{
     _id: String
     like: String
+    user: User
+    photo: Photo
   }
   
   type Photo{
     _id: String
-    url: String
+    image_url: String
+    description: String
     user: User
     event: Event
-    likes: [Like]
-    comments: [Comment]
   }
   
   type Status {
@@ -107,9 +111,16 @@ export default`
   }
   type PhotoComment {
     _id: String
-    name: String
-    type: String
+    comment: String
+    user: User
     photo: Photo
+  }
+  
+  type PhotoNotification{
+    _id:String
+    user: User 
+    photo_comment: PhotoComment
+    status: String
   }
 
   type Query {
@@ -133,7 +144,7 @@ export default`
     me: Me
    
     getPhotos: [Photo]
-    getPhoto(_id: ID!): Photo     
+    getUserPhotos(user: ID!, event: ID!): [Photo]     
 
   }
 
@@ -173,14 +184,15 @@ export default`
     addProfile(input: ProfileInput): Profile
     updateProfile(first_name:String!, last_name:String!, country: String, state: String, sex:String!, bio:String!, date_of_birth:String!, image_path:String): Profile
 
-    signup(email: String!, password: String!, username: String): Auth
+    signup(email: String!, password: String!, image_path:String!, username: String): Auth
     login(email: String!, password: String!): Auth
 
-    addPhoto(url:String!, user: ID, event: ID, likes: ID, comments: ID): Photo
+    addPhoto(image_url:String!, event:String!, description: String): Photo
     updatePhoto(url:String!, user: ID, event: ID, likes: ID, comments: ID): Photo
-    deletePhoto(_id: ID!): Status
-
+    deletePhoto(_id: ID!): Status 
+    
   }
+
 
   schema {
     query: Query

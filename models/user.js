@@ -18,6 +18,9 @@ var userSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
+    image_path: {
+        type: String,
+    },
     created_at: Date,
     updated_at: Date
 });

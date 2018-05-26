@@ -11,19 +11,25 @@ export default {
       throw error;
     }
   },
-  getPhoto: async (_, { _id }, { user }) => {
+  getUserPhotos: async (_, args, { user }) => {
     try {
-     // await requireAuth(user);
-      return Photo.findById(_id);
+        console.log("user is: "+args.user);
+
+      return Photo.find({user: args.user, event: args.event });
     } catch (error) {
       throw error;
     }
   },
   addPhoto: async (_, args, { user }) => {
     try {
-      console.log(args);
-      //await requireAuth(user);
-      return Photo.create({ ...args/*, user: user._id*/ });
+        await requireAuth(user);
+        const duserid = user? user._id: user;
+        var photo = new Photo({ ...args, user: duserid});
+        photo.save(function (err) {
+            if (err) return handleError(err);
+            // saved!
+        });
+        return photo;
     } catch (error) {
       throw error;
     }

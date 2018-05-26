@@ -32,10 +32,12 @@ export default {
     Event: {
         group: ({ group }) => Group.findById(group),
         eventMember: ({ _id }) => EventMember.find({ event: _id }),
+        photo: ({ _id }) => Photo.find({ event: _id }),
     },
     EventMember: {
         user: ({ user }) => User.findById(user),
         event: ({ event }) => Event.findById(event),
+        photo: ({ user, event }) => Photo.find({user: user, event:event }),
     },
     User: {
         group: ({ group }) => Group.findById(group),
@@ -45,6 +47,9 @@ export default {
         user: ({ user }) => User.findById(user),
         groupMember: ({ user }) => GroupMember.find({ user: user }),
         eventMember: ({ user }) => EventMember.find({ user: user }),
+    },
+    Photo: {
+        user: ({ user }) => User.findById(user),
     },
     PhotoComment: {
         photo: ({ photo }) => photo.findById(photo),
@@ -79,7 +84,7 @@ export default {
         userSearch: UserResolvers.userSearch,
         //for photo
         getPhotos: PhotoResolvers.getPhotos,
-        getPhoto: PhotoResolvers.getPhoto,
+        getUserPhotos: PhotoResolvers.getUserPhotos,
     },
     Mutation: {
         deletePhotoComment: PhotoCommentResolvers.deletePhotoComment,
@@ -87,7 +92,6 @@ export default {
 
         addGroup: GroupResolvers.addGroup,
         addGroupMember: GroupMemberResolvers.addGroupMember,
-
 
         addRequest: RequestResolvers.addRequest,
 
