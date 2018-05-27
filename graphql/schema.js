@@ -43,6 +43,7 @@ export default`
     event: Event
     receiverUser: User
     url: String
+    status: String
     created_at: Date
     updated_at: Date    
   }
@@ -172,7 +173,7 @@ export default`
     addGroup(title: String!, description: String): Group
     addGroupMember(group: String!, user: String!): GroupMember
     
-    addRequest(input: RequestInput): Boolean
+    addRequest(receiverUser:String!, group:String, event:String, status: String, url: String): Request
 
     addEvent(group: String!, title: String!, description: String,e_type: String!): Event
     addEventMember(event: String!, user: String!): EventMember

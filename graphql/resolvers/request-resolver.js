@@ -20,13 +20,13 @@ export default {
         }
     },
 
-    addRequest: async (_, {input}, {user}) => {
+    addRequest: async (_, args, {user}) => {
         try {
             //await requireAuth(user);
             console.log(user);
             const duserid = user ? user._id : user;
-            let requestObj = {...input, senderUser: duserid};
-            return !!Request.create(requestObj);
+            let requestObj = {...args, senderUser: duserid};
+            return Request.create(requestObj);
         } catch (error) {
             throw error;
         }

@@ -17,6 +17,9 @@ var requestSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    status: {
+        type: String //Pending,Accepted, Rejected
+    },
     url: {
         type: String
     },

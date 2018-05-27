@@ -55,8 +55,8 @@ export default {
         photo: ({ photo }) => photo.findById(photo),
     },
     Request: {
-        senderUser: ({ user }) => User.findById(user),
-        receiverUser: ({ user }) => User.findById(user),
+        // senderUser: ({ user }) => User.findById(user),
+        // receiverUser: ({ user }) => User.findById(user),
         group: ({ group }) => Group.findById(group),
         event: ({ event }) => Event.findById(event),
 
