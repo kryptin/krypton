@@ -17,22 +17,28 @@ export default {
             const group = await Group.create({ title: "Family", description:"Keep family events organised here", user: duserid, user_type:"Admin" });
             const groupMember = await GroupMember.create({ group: group._id, user: duserid, user_type:"Admin" });
 
-            const event = await Event.create({ group: group._id,  title: "My Birthday", description:"Celebrating Life", user: duserid, user_type:"Admin", e_type:"Public" });
+            const event = await Event.create({ group: group._id,  title: args.username+"'s Birthday", description:"Celebrating Life", user: duserid, user_type:"Admin", e_type:"Private" });
             const eventMember = await EventMember.create({ event: event._id, user: duserid, user_type:"Admin" });
 
             return {
                 token: user.createToken(),
             };
         } catch (error) {
+
             throw error;
 
         }
     },
 
-    userSearch: async (_, args) => {
+    userSearch: async (_, args, {user}) => {
         try {
-            //const query = await User.find();
-            return await User.find().or([{ username: args.params }, { email: args.params }]).sort({ createdAt: -1 });
+            var getUser = await requireAuth(user);
+            var foundUser = await User.findOne().or([{ username: args.params }, { email: args.params }]).sort({ createdAt: -1 });
+
+            if(getUser._id.toString() != foundUser._id.toString()){
+                return foundUser
+            }
+            return null;
         } catch (error) {
             throw error;
         }

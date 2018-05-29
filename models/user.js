@@ -8,7 +8,8 @@ import constants from '../config/constants'
 var userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
     },
     password: {
         type: String,
@@ -16,6 +17,7 @@ var userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        required: true,
         unique: true,
     },
     image_path: {
@@ -24,6 +26,7 @@ var userSchema = new mongoose.Schema({
     created_at: Date,
     updated_at: Date
 });
+
 
 
 userSchema.pre('save', function (next) {

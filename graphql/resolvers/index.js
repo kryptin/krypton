@@ -55,8 +55,8 @@ export default {
         photo: ({ photo }) => photo.findById(photo),
     },
     Request: {
-        // senderUser: ({ user }) => User.findById(user),
-        // receiverUser: ({ user }) => User.findById(user),
+        senderUser: ({ senderUser }) => User.findById(senderUser),
+        receiverUser: ({ receiverUser }) => User.findById(receiverUser),
         group: ({ group }) => Group.findById(group),
         event: ({ event }) => Event.findById(event),
 
@@ -69,11 +69,12 @@ export default {
         getUserGroups: GroupMemberResolvers.getUserGroups,
 
         getRequests: RequestResolvers.getRequests,
-        getRequest: RequestResolvers.getRequest,
+       // getRequest: RequestResolvers.getRequest,
 
         getEvents: EventResolvers.getEvents,
         getEvent: EventResolvers.getEvent,
         getEventByGroup: EventResolvers.getEventByGroup,
+        getPopularEvents: EventResolvers.getPopularEvents,
 
         getEventMembers: EventMemberResolvers.getEventMembers,
 

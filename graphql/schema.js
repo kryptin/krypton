@@ -128,7 +128,6 @@ export default`
     getPhotoComments: [PhotoComment]
     getEvents: [Event]
     getRequests: [Request]
-    getRequest(_id: ID!): Request
     
     getGroups: [Group]
     getGroup(_id: ID!): Group
@@ -138,15 +137,16 @@ export default`
 
     getEvent(_id: ID!): Event
     getEventByGroup(group: ID!): Event
+    getPopularEvents: [Event]
+
     getEventMembers: [EventMember]
 
     getProfile: Profile
-    userSearch(params: String!): [User]
+    userSearch(params: String!): User
     me: Me
    
     getPhotos: [Photo]
     getUserPhotos(user: ID!, event: ID!): [Photo]     
-
   }
 
   input RequestInput {

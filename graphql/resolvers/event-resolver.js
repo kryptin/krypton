@@ -9,7 +9,7 @@ export default {
 
     try {
       //await requireAuth(user);
-      return Event.find({}).sort({ createdAt: -1 })
+      return Event.find({}).sort({ created_at: -1 })
     } catch (error) {
       throw error;
     }
@@ -32,6 +32,14 @@ export default {
     }
   },
 
+   getPopularEvents: async(_, {user}) =>{
+    try{
+        return Event.find({e_type:"Public"}).sort({created_at:-1})
+    } catch (error){
+      throw  error;
+    }
+   },
+
   addEvent: async (_, args, { user }) => {
     try {
      await requireAuth(user);
@@ -43,7 +51,6 @@ export default {
       });
       EventMember.create({ event: event._id, user: duserid, user_type:"Admin" });
       return event;
-
     } catch (error) {
       throw error;
     }
