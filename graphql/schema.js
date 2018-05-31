@@ -174,7 +174,8 @@ export default`
     addGroupMember(group: String!, user: String!): GroupMember
     
     addRequest(receiverUser:String!, group:String, event:String, status: String, url: String): Request
-
+    acceptRequest(_id: ID!): Request
+    
     addEvent(group: String!, title: String!, description: String,e_type: String!): Event
     addEventMember(event: String!, user: String!): EventMember
 

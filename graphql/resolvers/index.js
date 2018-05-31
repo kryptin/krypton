@@ -95,6 +95,7 @@ export default {
         addGroupMember: GroupMemberResolvers.addGroupMember,
 
         addRequest: RequestResolvers.addRequest,
+        acceptRequest: RequestResolvers.acceptRequest,
 
         addEvent: EventResolvers.addEvent,
         addEventMember: EventMemberResolvers.addEventMember,

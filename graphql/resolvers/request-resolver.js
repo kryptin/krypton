@@ -1,12 +1,15 @@
 import Request from '../../models/request';
 import {requireAuth} from '../../services/auth';
+import Event from '../../models/event';
+import EventMember from '../../models/event-member';
+import GroupMember from '../../models/group-member';
 
 export default {
 
     getRequests: async (_, args, {user}) => {
         try {
             await requireAuth(user);
-            return Request.find({receiverUser:user}).sort({createdAt: -1})
+            return Request.find({receiverUser:user, status:"Pending"}).sort({createdAt: -1})
         } catch (error) {
             throw error;
         }
@@ -38,6 +41,29 @@ export default {
                 var result = {'_id':checkRequest._id,'status':"Already invited"}
                 return result;
             }
+
+        } catch (error) {
+            throw error;
+        }
+    },
+
+    acceptRequest: async (_, args, {user}) => {
+        try {
+            await requireAuth(user);
+            const duserid = user ? user._id : user;
+            var request = await Request.findById( args._id);
+
+            if(request.status == "Pending"){
+                request = await Request.findByIdAndUpdate( args._id , {status:"Accepted"}, {new: true});
+               var groupMember = await GroupMember.create({ group: request.group, user: duserid, user_type:"Member" });
+
+                var  groupEvents = await Event.find({group:request.group })
+                groupEvents.forEach ( event => {
+                    EventMember.create({ event: event._id, user: duserid, user_type:"Member" });
+                });
+            }
+
+            return request;
 
         } catch (error) {
             throw error;
