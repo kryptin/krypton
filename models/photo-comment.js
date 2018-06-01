@@ -2,8 +2,12 @@ import mongoose, { Schema } from 'mongoose';
 
 
 var photoCommentSchema = new Schema({
-    name: {
+    comment: {
         type: String,
+        required: true
+    },
+    user: {
+        type: Schema.Types.ObjectId,
         required: true
     },
     photo: {

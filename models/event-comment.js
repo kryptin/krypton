@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-var commentSchema = new mongoose.Schema({
+var eventCommentSchema = new mongoose.Schema({
   postId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true
@@ -11,4 +11,4 @@ var commentSchema = new mongoose.Schema({
   }
 });
 
-export default mongoose.model('Comment', commentSchema);
+export default mongoose.model('EventComment', eventCommentSchema);

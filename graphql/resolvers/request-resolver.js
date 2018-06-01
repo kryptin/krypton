@@ -14,16 +14,8 @@ export default {
             throw error;
         }
     },
-    // getRequest: async (_, {_id}, {user}) => {
-    //     try {
-    //         await requireAuth(user);
-    //         return Request.findById(_id);
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // },
 
-    addRequest: async (_, args, {user}) => {
+    sendRequest: async (_, args, {user}) => {
         try {
             await requireAuth(user);
             const duserid = user ? user._id : user;
@@ -70,18 +62,13 @@ export default {
         }
     },
 
-    deleteRequest: async (_, {_id}, {user}) => {
+    rejectRequest: async (_, {_id}, {user}) => {
         try {
             await requireAuth(user);
-            const group = await Request.findOne({_id, user: user._id});
+            var request = await Request.findByIdAndUpdate( _id , {status:"Rejected"}, {new: true});
 
-            if (!group) {
-                throw new Error('Not found!');
-            }
-            await group.remove();
-            return {
-                message: 'Delete Success!'
-            }
+             return request;
+
         } catch (error) {
             throw error;
         }

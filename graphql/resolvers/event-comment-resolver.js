@@ -1,30 +1,30 @@
-import Comment from '../../models/comment';
+import EventComment from '../../models/event-comment';
 import { requireAuth } from '../../services/auth';
 
 export default {
 
-  getComments: async (_, args, { user }) => {
+  getEventComments: async (_, args, { user }) => {
     try {
       //await requireAuth(user);
-      return Comment.find({}).sort({ createdAt: -1 })
+      return EventComment.find({}).sort({ createdAt: -1 })
     } catch (error) {
       throw error;
     }
   },
   
-  addComment: async (_, args, { user }) => {
+  addEventComment: async (_, args, { user }) => {
     try {
       await requireAuth(user);
-      return Comment.create({ ...args, user: user._id });
+      return EventComment.create({ ...args, user: user._id });
     } catch (error) {
       throw error;
     }
   },
  
-  deleteComment: async (_, { _id }, { user }) => {
+  deleteEventComment: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
-      const comment = await Comment.findOne({ _id, user: user._id });
+      const comment = await EventComment.findOne({ _id, user: user._id });
 
       if (!comment) {
         throw new Error('Not found!');

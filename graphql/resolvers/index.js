@@ -3,10 +3,13 @@ import GroupResolvers from './group-resolver';
 import GroupMemberResolvers from './group-member-resolver';
 import EventResolvers from './event-resolver';
 import EventMemberResolvers from './event-member-resolver';
-import CommentResolvers from './comment-resolver';
+import EventCommentResolvers from './event-comment-resolver';
 import UserResolvers from './user-resolver';
 import ProfileResolvers from './profile-resolver';
 import RequestResolvers from './request-resolver';
+import PhotoCommentResolvers from './photo-comment-resolver';
+import PhotoLikeResolvers from './photo-like-resolver';
+
 import User from '../../models/user';
 import Group from '../../models/group';
 import GroupMember from '../../models/group-member';
@@ -15,8 +18,9 @@ import EventMember from '../../models/event-member';
 import Profile from '../../models/profile';
 import PhotoResolvers from './photo-resolver';
 import Photo from '../../models/photo';
-import PhotoComment from '../../models/comment-on-photo';
-import PhotoCommentResolvers from './comment-on-photo-resolver';
+import PhotoComment from '../../models/photo-comment';
+
+
 
 export default {
     Date: GraphQLDate,
@@ -53,6 +57,7 @@ export default {
     },
     PhotoComment: {
         photo: ({ photo }) => photo.findById(photo),
+        user: ({ user }) => User.findById(user),
     },
     Request: {
         senderUser: ({ senderUser }) => User.findById(senderUser),
@@ -62,7 +67,6 @@ export default {
 
     },
     Query: {
-        getPhotoComments: PhotoCommentResolvers.getPhotoComments,
 
         getGroups: GroupResolvers.getGroups,
         getGroup: GroupResolvers.getGroup,
@@ -77,8 +81,8 @@ export default {
         getPopularEvents: EventResolvers.getPopularEvents,
 
         getEventMembers: EventMemberResolvers.getEventMembers,
+        getEventComments: EventCommentResolvers.getEventComments,
 
-        getComments: CommentResolvers.getComments,
         getProfile: ProfileResolvers.getProfile,
 
         me: UserResolvers.me,
@@ -86,23 +90,26 @@ export default {
         //for photo
         getPhotos: PhotoResolvers.getPhotos,
         getUserPhotos: PhotoResolvers.getUserPhotos,
+        getPhotoComments: PhotoCommentResolvers.getPhotoComments,
+        getPhotoLikes: PhotoLikeResolvers.getPhotoLikes,
+
+
     },
     Mutation: {
-        deletePhotoComment: PhotoCommentResolvers.deletePhotoComment,
-        addPhotoComment: PhotoCommentResolvers.addPhotoComment,
-
         addGroup: GroupResolvers.addGroup,
         addGroupMember: GroupMemberResolvers.addGroupMember,
 
-        addRequest: RequestResolvers.addRequest,
+        sendRequest: RequestResolvers.sendRequest,
         acceptRequest: RequestResolvers.acceptRequest,
+        rejectRequest: RequestResolvers.rejectRequest,
 
         addEvent: EventResolvers.addEvent,
         addEventMember: EventMemberResolvers.addEventMember,
+        addEventComment: EventCommentResolvers.addEventComment,
 
-        addComment: CommentResolvers.addComment,
         addProfile: ProfileResolvers.addProfile,
         updateProfile: ProfileResolvers.updateProfile,
+
         signup: UserResolvers.signup,
         login: UserResolvers.login,
 
@@ -110,6 +117,13 @@ export default {
         addPhoto: PhotoResolvers.addPhoto,
         updatePhoto: PhotoResolvers.updatePhoto,
         deletePhoto: PhotoResolvers.deletePhoto,
+
+        deletePhotoComment: PhotoCommentResolvers.deletePhotoComment,
+        addPhotoComment: PhotoCommentResolvers.addPhotoComment,
+        addPhotoLike: PhotoLikeResolvers.addPhotoLike,
+
+
+
     },
     //so as to populate Event with Group
     // I must use dataloader on this later

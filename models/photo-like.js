@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 
-var likePhotoSchema = new Schema({
+var PhotoLikeSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
@@ -12,4 +12,4 @@ var likePhotoSchema = new Schema({
     }
 });
 
-export default mongoose.model('Like',likePhotoSchema);
+export default mongoose.model('PhotoLike',PhotoLikeSchema);

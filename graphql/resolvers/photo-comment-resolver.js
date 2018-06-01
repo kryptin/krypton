@@ -1,4 +1,4 @@
-import PhotoComment from '../../models/comment-on-photo';
+import PhotoComment from '../../models/photo-comment';
 import { requireAuth } from '../../services/auth';
 
 export default {
@@ -6,13 +6,11 @@ export default {
     getPhotoComments: async (_, args, { user }) => {
         try{
             await requireAuth(user);
-            return PhotoComment.find({}).sort({ createdAt: -1 })
+            return PhotoComment.find({photo: args.photo}).sort({ createdAt: -1 })
         } catch (error){
             throw error;
         }
     },
-
-
 
     addPhotoComment: async (_, args, { user }) => {
         try {
