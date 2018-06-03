@@ -100,8 +100,7 @@ export default {
         addGroupMember: GroupMemberResolvers.addGroupMember,
 
         sendRequest: RequestResolvers.sendRequest,
-        acceptRequest: RequestResolvers.acceptRequest,
-        rejectRequest: RequestResolvers.rejectRequest,
+        respond2Request: RequestResolvers.respond2Request,
 
         addEvent: EventResolvers.addEvent,
         addEventMember: EventMemberResolvers.addEventMember,
