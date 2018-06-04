@@ -1,7 +1,7 @@
 const SERVER_ENV = {
     'production': {
-        'SERVER_PORT': process.env.IWIP_SERVER_PORT || 4800
-        // 'SERVER_PORT': process.env.PORT || 4800
+        // 'SERVER_PORT': process.env.IWIP_SERVER_PORT || 4800
+        'SERVER_PORT': process.env.PORT || 4800
     },
     'preproduction': {
         'SERVER_PORT': 4800
