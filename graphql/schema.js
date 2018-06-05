@@ -131,6 +131,8 @@ export default`
     getGroups: [Group]
     getGroup(_id: ID!): Group
     getUserGroups: [GroupMember]
+    getGroupMembers(_id: ID!): [GroupMember]
+
     
     getEventComments: [EventComment]
 
@@ -173,13 +175,14 @@ export default`
    
     addGroup(title: String!, description: String): Group
     addGroupMember(group: String!, user: String!): GroupMember
-    
+    makeGroupAdmin(_id: ID!): GroupMember
+
     sendRequest(receiverUser:String!, group:String, event:String, status: String, url: String): Request
     respond2Request(_id: ID!, response_type:String!): Request
 
-    
     addEvent(group: String!, title: String!, description: String,e_type: String!): Event
     addEventMember(event: String!, user: String!): EventMember
+    
 
     addEventComment(text:String!, postId: Int): EventComment
     updateEvent(_id: ID!, name: String): Event

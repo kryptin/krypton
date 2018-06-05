@@ -71,6 +71,7 @@ export default {
         getGroups: GroupResolvers.getGroups,
         getGroup: GroupResolvers.getGroup,
         getUserGroups: GroupMemberResolvers.getUserGroups,
+        getGroupMembers: GroupMemberResolvers.getGroupMembers,
 
         getRequests: RequestResolvers.getRequests,
        // getRequest: RequestResolvers.getRequest,
@@ -96,8 +97,10 @@ export default {
 
     },
     Mutation: {
+        
         addGroup: GroupResolvers.addGroup,
         addGroupMember: GroupMemberResolvers.addGroupMember,
+        makeGroupAdmin: GroupMemberResolvers.makeGroupAdmin,
 
         sendRequest: RequestResolvers.sendRequest,
         respond2Request: RequestResolvers.respond2Request,
