@@ -125,6 +125,7 @@ export default`
   }
 
   type Query {
+  
     getEvents: [Event]
     getRequests: [Request]
     
@@ -134,13 +135,12 @@ export default`
     getGroupMembers(_id: ID!): [GroupMember]
 
     
-    getEventComments: [EventComment]
-
     getEvent(_id: ID!): Event
+    getUserEvents: [EventMember]
     getEventByGroup(group: ID!): Event
     getPopularEvents: [Event]
-
-    getEventMembers: [EventMember]
+    getEventMembers(event: ID!): [EventMember]
+    getEventComments: [EventComment]
 
     getProfile: Profile
     userSearch(params: String!): User
@@ -174,15 +174,12 @@ export default`
   type Mutation {
    
     addGroup(title: String!, description: String): Group
-    addGroupMember(group: String!, user: String!): GroupMember
     makeGroupAdmin(_id: ID!): GroupMember
 
     sendRequest(receiverUser:String!, group:String, event:String, status: String, url: String): Request
     respond2Request(_id: ID!, response_type:String!): Request
 
-    addEvent(group: String!, title: String!, description: String,e_type: String!): Event
-    addEventMember(event: String!, user: String!): EventMember
-    
+    addEvent(group: String!, title: String!, description: String,e_type: String!): Event    
 
     addEventComment(text:String!, postId: Int): EventComment
     updateEvent(_id: ID!, name: String): Event

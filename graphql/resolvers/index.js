@@ -82,6 +82,7 @@ export default {
         getPopularEvents: EventResolvers.getPopularEvents,
 
         getEventMembers: EventMemberResolvers.getEventMembers,
+        getUserEvents: EventMemberResolvers.getUserEvents,
         getEventComments: EventCommentResolvers.getEventComments,
 
         getProfile: ProfileResolvers.getProfile,
@@ -99,14 +100,14 @@ export default {
     Mutation: {
         
         addGroup: GroupResolvers.addGroup,
-        addGroupMember: GroupMemberResolvers.addGroupMember,
+        // addGroupMember: GroupMemberResolvers.addGroupMember,
         makeGroupAdmin: GroupMemberResolvers.makeGroupAdmin,
 
         sendRequest: RequestResolvers.sendRequest,
         respond2Request: RequestResolvers.respond2Request,
 
         addEvent: EventResolvers.addEvent,
-        addEventMember: EventMemberResolvers.addEventMember,
+        // addEventMember: EventMemberResolvers.addEventMember,
         addEventComment: EventCommentResolvers.addEventComment,
 
         addProfile: ProfileResolvers.addProfile,
