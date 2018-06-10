@@ -105,6 +105,7 @@ export default {
 
         sendRequest: RequestResolvers.sendRequest,
         respond2Request: RequestResolvers.respond2Request,
+        sendJoinEventRequest: RequestResolvers.sendJoinEventRequest,
 
         addEvent: EventResolvers.addEvent,
         // addEventMember: EventMemberResolvers.addEventMember,
@@ -124,7 +125,6 @@ export default {
         deletePhotoComment: PhotoCommentResolvers.deletePhotoComment,
         addPhotoComment: PhotoCommentResolvers.addPhotoComment,
         addPhotoLike: PhotoLikeResolvers.addPhotoLike,
-
 
 
     },

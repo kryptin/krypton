@@ -14,7 +14,7 @@ var photoCommentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Photo'
     },
-});
+}, { timestamps: true });
 
 export default mongoose.model('PhotoComment', photoCommentSchema);
 

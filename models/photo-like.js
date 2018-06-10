@@ -10,6 +10,6 @@ var PhotoLikeSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Photo'
     }
-});
+}, { timestamps: true });
 
 export default mongoose.model('PhotoLike',PhotoLikeSchema);

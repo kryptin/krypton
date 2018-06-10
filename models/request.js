@@ -17,6 +17,9 @@ var requestSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    requestType: {
+        type: String //Invite(owner invited you),Join(you tell owner u want to join)
+    },
     status: {
         type: String //Pending,Accepted, Rejected
     },
@@ -36,6 +39,7 @@ requestSchema.pre('save', function (next) {
         this.created_at = currentDate;
 
     next();
+
 });
 
 export default mongoose.model('Request', requestSchema);

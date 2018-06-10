@@ -7,6 +7,8 @@ export default`
     image_path: String!
     group: Group
     profile: Profile
+    created_at: Date
+    updated_at: Date 
   }
   type Auth {
     token: String!
@@ -16,6 +18,7 @@ export default`
     username: String
     email: String!
   }
+  
   type Group {
     _id: ID!
     title: String
@@ -44,6 +47,7 @@ export default`
     receiverUser: User
     url: String
     status: String
+    requestType: String
     created_at: Date
     updated_at: Date    
   }
@@ -91,6 +95,8 @@ export default`
     state: String
     location: String
     image_path: String
+    created_at: Date
+    updated_at: Date 
   }
   type PhotoLike{
     _id: String
@@ -152,6 +158,7 @@ export default`
     getPhotoLikes(photo: ID!): [PhotoLike]
 
   }
+  
 
   input RequestInput {
     senderUser: String
@@ -176,7 +183,8 @@ export default`
     addGroup(title: String!, description: String): Group
     makeGroupAdmin(_id: ID!): GroupMember
 
-    sendRequest(receiverUser:String!, group:String, event:String, status: String, url: String): Request
+    sendRequest(receiverUser:String!, group:String, event:String, status: String, url: String, requestType: String!): Request
+    sendJoinEventRequest(receiverUser:String!, event:String, status: String, url: String, requestType: String!): Request
     respond2Request(_id: ID!, response_type:String!): Request
 
     addEvent(group: String!, title: String!, description: String,e_type: String!): Event    

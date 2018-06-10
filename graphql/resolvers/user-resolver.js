@@ -40,7 +40,7 @@ export default {
             }
             return null;
         } catch (error) {
-            throw error;
+            //throw error;
         }
     },
 

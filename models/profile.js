@@ -39,4 +39,14 @@ var profileSchema = new mongoose.Schema({
     updated_at: Date
 });
 
+profileSchema.pre('save', function (next) {
+
+    var currentDate = new Date();
+    this.updated_at = currentDate;
+    if (!this.created_at)
+        this.created_at = currentDate;
+
+    next();
+
+});
 export default mongoose.model('Profile', profileSchema);
