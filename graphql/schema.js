@@ -111,6 +111,7 @@ export default`
     description: String
     user: User
     event: Event
+    photoComment: [PhotoComment]
   }
   
   type Status {
@@ -203,8 +204,8 @@ export default`
     updatePhoto(url:String!, user: ID, event: ID, likes: ID, comments: ID): Photo
     deletePhoto(_id: ID!): Status 
     deletePhotoComment(_id: ID!): PhotoComment
-    addPhotoComment(comment:String!, photo: String!): PhotoComment
-    addPhotoLike( photo: String!): PhotoLike
+    addPhotoComment(comment:String!, photo: ID!): PhotoComment
+    addPhotoLike( photo: ID!): PhotoLike
     
   }
 

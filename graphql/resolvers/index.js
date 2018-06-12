@@ -54,9 +54,11 @@ export default {
     },
     Photo: {
         user: ({ user }) => User.findById(user),
+        photoComment: ({  _id  }) => PhotoComment.find({photo: _id }),
+
     },
     PhotoComment: {
-        photo: ({ photo }) => photo.findById(photo),
+        photo: ({ photo }) => Photo.findById(photo),
         user: ({ user }) => User.findById(user),
     },
     Request: {
