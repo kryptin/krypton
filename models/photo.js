@@ -6,6 +6,7 @@ const photoSchema = new Schema({
       required: true
   },
   description: String,
+  view: String,
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',

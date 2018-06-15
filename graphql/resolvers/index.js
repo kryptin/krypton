@@ -18,6 +18,7 @@ import EventMember from '../../models/event-member';
 import Profile from '../../models/profile';
 import PhotoResolvers from './photo-resolver';
 import Photo from '../../models/photo';
+import PhotoLike from '../../models/photo-like';
 import PhotoComment from '../../models/photo-comment';
 
 
@@ -55,10 +56,14 @@ export default {
     Photo: {
         user: ({ user }) => User.findById(user),
         photoComment: ({  _id  }) => PhotoComment.find({photo: _id }),
+        photoLike: ({  _id  }) => PhotoLike.find({photo: _id }),
 
     },
     PhotoComment: {
         photo: ({ photo }) => Photo.findById(photo),
+        user: ({ user }) => User.findById(user),
+    },
+    PhotoLike: {
         user: ({ user }) => User.findById(user),
     },
     Request: {
@@ -122,6 +127,7 @@ export default {
         //for photo
         addPhoto: PhotoResolvers.addPhoto,
         updatePhoto: PhotoResolvers.updatePhoto,
+        updatePhotoView: PhotoResolvers.updatePhotoView,
         deletePhoto: PhotoResolvers.deletePhoto,
 
         deletePhotoComment: PhotoCommentResolvers.deletePhotoComment,
