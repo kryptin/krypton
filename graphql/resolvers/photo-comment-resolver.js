@@ -6,7 +6,7 @@ export default {
     getPhotoComments: async (_, args, { user }) => {
         try{
             await requireAuth(user);
-            return PhotoComment.find({photo: args.photo}).sort({ createdAt: -1 })
+            return PhotoComment.find({photo: args.photo})
         } catch (error){
             throw error;
         }
