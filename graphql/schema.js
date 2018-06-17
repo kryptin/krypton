@@ -44,6 +44,7 @@ export default`
     senderUser: User
     group: Group
     event: Event
+    photo: Photo
     receiverUser: User
     url: String
     status: String
@@ -209,7 +210,7 @@ export default`
     updatePhotoView( photo: ID!): Photo
     deletePhoto(_id: ID!): Status 
     deletePhotoComment(_id: ID!): PhotoComment
-    addPhotoComment(comment:String!, photo: ID!): PhotoComment
+    addPhotoComment(comment:String!, photo: ID!, photoCreator:ID!): PhotoComment
     addPhotoLike( photo: ID!): PhotoLike
     
   }

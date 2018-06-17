@@ -71,6 +71,7 @@ export default {
         receiverUser: ({ receiverUser }) => User.findById(receiverUser),
         group: ({ group }) => Group.findById(group),
         event: ({ event }) => Event.findById(event),
+        photo: ({ photo }) => Photo.findById(photo),
 
     },
     Query: {

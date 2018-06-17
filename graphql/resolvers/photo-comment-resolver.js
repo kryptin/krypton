@@ -1,5 +1,6 @@
 import PhotoComment from '../../models/photo-comment';
 import { requireAuth } from '../../services/auth';
+import Request from '../../models/request';
 
 export default {
 
@@ -16,6 +17,10 @@ export default {
         try {
          // await requireAuth(user);
           const duserid = user? user._id: user;
+          if(duserid.toString() != args.photoCreator.toString()){
+              await Request.create({receiverUser:args.photoCreator, senderUser:duserid,
+                                    photo:args.photo, status:"Pending", request_type:"Comment"});
+          }
           return PhotoComment.create({ ...args, user: duserid });
         } catch (error) {
           throw error;

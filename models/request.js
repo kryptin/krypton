@@ -13,6 +13,10 @@ var requestSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'Event'
     },
+    photo: {
+        type: Schema.Types.ObjectId,
+        ref: 'Photo'
+    },
     receiverUser: {
         type: Schema.Types.ObjectId,
         ref: 'User'
