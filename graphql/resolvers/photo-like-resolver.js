@@ -14,6 +14,7 @@ export default {
             var photoLikes = await PhotoLike.findOne({user: duserid, photo:args.photo});
 
             if(photoLikes){
+                await photoLikes.remove();
                 return photoLikes
             }else{
                 return PhotoLike.create({ ...args, user: duserid });

@@ -24,7 +24,7 @@ export default {
     try {
         await requireAuth(user);
         const duserid = user? user._id: user;
-        var photo = new Photo({ ...args, user: duserid});
+        var photo = new Photo({ ...args, user: duserid, view:1});
         photo.save(function (err) {
             if (err) return handleError(err);
             // saved!
@@ -35,7 +35,12 @@ export default {
     }
   },
 
-  updatePhoto: async (_, {_id}, {user}) =>{
+  updatePhotoView: async (_, args ) =>{
+      let photos = await Photo.findOne({_id:args.photo});
+      return await Photo.findByIdAndUpdate( args.photo , {view: parseInt(photos.view)+1}, {new: true});
+  },
+
+   updatePhoto: async (_, {_id}, {user}) =>{
     //await requireAuth(user);
     const photo = await Photo.findOne({ _id, user: user._id });
     if (!photo) {
