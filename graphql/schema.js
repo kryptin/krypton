@@ -192,7 +192,8 @@ export default`
     sendGroupInvite(receiverUser:String!, group:String!, status: String!, requestType: String!): Request
     sendEventInvite(receiverUser:String!, event:String!, status: String!, requestType: String!): Request
     sendJoinEventRequest(receiverUser:String!, event:String, status: String, url: String, requestType: String!): Request
-    respond2Request(_id: ID!, response_type:String!): Request
+    respond2JoinEventRequest(_id: ID!, response_type:String!): Request
+    respond2Invite(_id: ID!, response_type:String!): Request
     clearCommentNotification(_id: ID!): Request
     
     addEvent(group: String!, title: String!, description: String,e_type: String!): Event    

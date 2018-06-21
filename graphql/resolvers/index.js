@@ -114,8 +114,10 @@ export default {
 
         sendGroupInvite: RequestResolvers.sendGroupInvite,
         sendEventInvite: RequestResolvers.sendEventInvite,
-        respond2Request: RequestResolvers.respond2Request,
+        respond2Invite: RequestResolvers.respond2Invite,
+
         sendJoinEventRequest: RequestResolvers.sendJoinEventRequest,
+        respond2JoinEventRequest: RequestResolvers.respond2JoinEventRequest,
         clearCommentNotification: RequestResolvers.clearCommentNotification,
 
         addEvent: EventResolvers.addEvent,

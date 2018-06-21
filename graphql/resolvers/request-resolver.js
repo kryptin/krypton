@@ -15,7 +15,6 @@ export default {
         }
     },
 
-
     sendGroupInvite: async (_, args, {user}) => {
         try {
             await requireAuth(user);
@@ -84,8 +83,8 @@ export default {
             throw error;
         }
     },
-    
-    respond2Request: async (_, args, {user}) => {
+
+    respond2Invite: async (_, args, {user}) => {
         try {
             await requireAuth(user);
             const duserid = user ? user._id : user;
@@ -94,32 +93,23 @@ export default {
             if( args.response_type == "Accept"){
                 request = await Request.findByIdAndUpdate( args._id , {status:"Accepted"}, {new: true});
 
-                if(request.requestType == "Invite"){
-                    if(request.group){
-                        var groupMember = await GroupMember.create({ group: request.group, user: duserid, user_type:"Member" });
-                        var  groupEvents = await Event.find({group:request.group })
-                        if( groupEvents){
-                            for (let index = 0; index <  groupEvents.length; index++) {
-                                var event =  groupEvents[index];
-                                var result = await EventMember.findOne({ event: event._id, user: duserid, user_type:"Member" });
-                                if(!result){
-                                    await EventMember.create({  event: event._id, user: duserid, user_type:"Member" });
-                                }
+                if(request.group){
+                    var groupMember = await GroupMember.create({ group: request.group, user: duserid, user_type:"Member" });
+                    var  groupEvents = await Event.find({group:request.group })
+                    if( groupEvents){
+                        for (let index = 0; index <  groupEvents.length; index++) {
+                            var event =  groupEvents[index];
+                            var result = await EventMember.findOne({ event: event._id, user: duserid, user_type:"Member" });
+                            if(!result){
+                                await EventMember.create({  event: event._id, user: duserid, user_type:"Member" });
                             }
                         }
-                    }else if (request.event){
-
-                        var result = await EventMember.findOne({ event: request.event, user: duserid, user_type:"Member" });
-                        if(!result){
-                            EventMember.create({ event: request.event, user: duserid, user_type:"Member" });
-                        }
                     }
-                }else if(request.requestType == "Join") {
-                    request = await Request.findByIdAndUpdate( args._id , {status:"Accepted"}, {new: true});
+                }else if (request.event){
 
-                    var result = await EventMember.findOne({ event: request.event, user: request.senderUser, user_type:"Member" });
+                    var result = await EventMember.findOne({ event: request.event, user: duserid, user_type:"Member" });
                     if(!result){
-                        EventMember.create({ event: request.event, user: request.senderUser, user_type:"Member" });
+                        EventMember.create({ event: request.event, user: duserid, user_type:"Member" });
                     }
                 }
 
@@ -134,6 +124,31 @@ export default {
         }
     },
 
+    respond2JoinEventRequest: async (_, args, {user}) => {
+        try {
+            await requireAuth(user);
+            const duserid = user ? user._id : user;
+            var request = null;
+
+            if( args.response_type == "Accept"){
+                request = await Request.findByIdAndUpdate( args._id , {status:"Accepted"}, {new: true});
+
+                var result = await EventMember.findOne({ event: request.event, user: request.senderUser, user_type:"Member" });
+                if(!result){
+                    EventMember.create({ event: request.event, user: request.senderUser, user_type:"Member" });
+                }
+
+            }else if( args.response_type == "Reject"){
+                request = await Request.findByIdAndUpdate( args._id , {status:"Rejected"}, {new: true});
+            }
+
+            return request;
+
+        } catch (error) {
+            throw error;
+        }
+    },
+    
     sendJoinEventRequest: async (_, args, {user}) => {
         try {
             await requireAuth(user);
