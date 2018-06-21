@@ -148,7 +148,7 @@ export default {
             throw error;
         }
     },
-    
+
     sendJoinEventRequest: async (_, args, {user}) => {
         try {
             await requireAuth(user);
