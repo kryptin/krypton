@@ -57,6 +57,7 @@ export default {
         user: ({ user }) => User.findById(user),
         photoComment: ({  _id  }) => PhotoComment.find({photo: _id }),
         photoLike: ({  _id  }) => PhotoLike.find({photo: _id }),
+        event: ({ event }) => Event.findById( event ),
 
     },
     PhotoComment: {
@@ -111,9 +112,13 @@ export default {
         // addGroupMember: GroupMemberResolvers.addGroupMember,
         makeGroupAdmin: GroupMemberResolvers.makeGroupAdmin,
 
-        sendRequest: RequestResolvers.sendRequest,
-        respond2Request: RequestResolvers.respond2Request,
+        sendGroupInvite: RequestResolvers.sendGroupInvite,
+        sendEventInvite: RequestResolvers.sendEventInvite,
+        respond2Invite: RequestResolvers.respond2Invite,
+
         sendJoinEventRequest: RequestResolvers.sendJoinEventRequest,
+        respond2JoinEventRequest: RequestResolvers.respond2JoinEventRequest,
+        clearCommentNotification: RequestResolvers.clearCommentNotification,
 
         addEvent: EventResolvers.addEvent,
         // addEventMember: EventMemberResolvers.addEventMember,

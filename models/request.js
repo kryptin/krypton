@@ -25,7 +25,7 @@ var requestSchema = new mongoose.Schema({
         type: String //Invite(owner invited you),Join(you tell owner u want to join)
     },
     status: {
-        type: String //Pending,Accepted, Rejected
+        type: String //Pending,Accepted, Rejected , Cleared
     },
     url: {
         type: String
