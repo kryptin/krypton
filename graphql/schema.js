@@ -155,6 +155,7 @@ export default`
     getEventComments: [EventComment]
 
     getProfile: Profile
+    getPublicProfile(user: ID!): Profile
     userSearch(params: String!): User
     me: Me
    

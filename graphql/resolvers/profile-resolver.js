@@ -15,6 +15,14 @@ export default {
     }
   },
 
+  getPublicProfile: async (_, args) => {
+        try {
+            return Profile.findOne({user:args.user});
+        } catch (error) {
+            throw error;
+        }
+  },
+
   addProfile: async (_, {input}, { user }) => {
     try {
       await requireAuth(user);

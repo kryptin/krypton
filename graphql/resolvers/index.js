@@ -95,6 +95,7 @@ export default {
         getEventComments: EventCommentResolvers.getEventComments,
 
         getProfile: ProfileResolvers.getProfile,
+        getPublicProfile: ProfileResolvers.getPublicProfile,
 
         me: UserResolvers.me,
         userSearch: UserResolvers.userSearch,
@@ -142,7 +143,7 @@ export default {
 
 
     },
+
     //so as to populate Event with Group
     // I must use dataloader on this later
-
 }
