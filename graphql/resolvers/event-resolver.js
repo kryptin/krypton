@@ -14,6 +14,7 @@ export default {
       throw error;
     }
   },
+
   getEvent: async (_, { _id }, { user }) => {
     try {
      // await requireAuth(user);
@@ -49,7 +50,7 @@ export default {
         if (err) return handleError(err);
         // saved!
       });
-      EventMember.create({ event: event._id, user: duserid, user_type:"Admin" });
+     EventMember.create({ event: event._id, user: duserid, user_type:"Admin" });
       return event;
     } catch (error) {
       throw error;

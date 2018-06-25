@@ -1,12 +1,16 @@
 import PhotoComment from '../../models/photo-comment';
 import { requireAuth } from '../../services/auth';
 import Request from '../../models/request';
+import Photo from '../../models/photo';
+
 
 export default {
 
     getPhotoComments: async (_, args, { user }) => {
         try{
             await requireAuth(user);
+            let photos = await Photo.findOne({_id:args.photo});
+            await Photo.findByIdAndUpdate( args.photo , {view: parseInt(photos.view)+1});
             return PhotoComment.find({photo: args.photo})
         } catch (error){
             throw error;
