@@ -1,5 +1,5 @@
 export default {
-<<<<<<< HEAD
+
     //PORT: process.env.PORT || 4000,
     // development
     DB_URL: 'mongodb://localhost/krypton_db',
@@ -7,14 +7,4 @@ export default {
     // DB_URL: process.env.MONGODB_URI || 'mongodb://krypton:buldozed@ds131329.mlab.com:31329/heroku_1kwwffk8',
     GRAPHQL_PATH: '/graphql',
     JWT_SECRET: 'sjhf887sdfhjsd8778'
-}
-=======
-  //PORT: process.env.PORT || 4000,
-  // development
-  DB_URL: "mongodb://localhost/krypton_db",
-  //production
-  // DB_URL: process.env.MONGODB_URI || 'mongodb://krypton:buldozed@ds131329.mlab.com:31329/heroku_1kwwffk8',
-  GRAPHQL_PATH: "/graphql",
-  JWT_SECRET: "sjhf887sdfhjsd8778"
 };
->>>>>>> bc49dcba05d44fb0094688d5830f7147dc23aa8f
