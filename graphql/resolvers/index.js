@@ -127,6 +127,7 @@ export default {
 
         addProfile: ProfileResolvers.addProfile,
         updateProfile: ProfileResolvers.updateProfile,
+        updateProfilePic: ProfileResolvers.updateProfilePic,
 
         signup: UserResolvers.signup,
         login: UserResolvers.login,

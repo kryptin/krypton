@@ -1,6 +1,5 @@
 import Profile from '../../models/profile';
-import Group from '../../models/group';
-import GroupMember from '../../models/group-member';
+import User from '../../models/user';
 import { requireAuth } from '../../services/auth';
 
 export default {
@@ -32,6 +31,17 @@ export default {
       throw error;
     }
   },
+
+    updateProfilePic: async (_, args, { user }) => {
+        try {
+            await requireAuth(user);
+            const duserid = user? user._id: user;
+            return await User.findByIdAndUpdate(duserid, {image_path:args.image_path}, {new: true});
+
+        } catch (error) {
+            throw error;
+        }
+    },
   
   updateProfile: async (_, args, { user }) => {
     try {

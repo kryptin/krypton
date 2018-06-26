@@ -13,7 +13,7 @@ export default {
             const user = await User.create(args);
             const duserid = user? user._id: user;
 
-            Profile.create({ user: duserid, country:"Nigeria" });
+            Profile.create({ user: duserid, country:"Nigeria", state:"Lagos" });
             const group = await Group.create({ title: "Family", description:"Keep family events organised here", user: duserid, user_type:"Admin" });
             const groupMember = await GroupMember.create({ group: group._id, user: duserid, user_type:"Admin" });
 
