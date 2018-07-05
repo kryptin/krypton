@@ -45,7 +45,7 @@ export default {
         try{
             return Event.aggregate([
                 {$match: {e_type:"Public"}}, // filter the results
-                {$sample: {size: 5}} // You want to get 5 docs
+                {$sample: {size: 20}} // You want to get 20 docs
             ]);
             // return Event.find({e_type:"Public"}).sort({created_at:-1})
         } catch (error){
