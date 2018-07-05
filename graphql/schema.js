@@ -151,6 +151,7 @@ export default`
     getUserEvents: [EventMember]
     getEventByGroup(group: ID!): Event
     getPopularEvents: [Event]
+    getRandomEvents: [Event]
     getEventMembers(event: ID!): [EventMember]
     getEventComments: [EventComment]
 

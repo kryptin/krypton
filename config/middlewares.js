@@ -55,39 +55,26 @@ export default app => {
                 user: req.user
             },
             formatError: err => {
-                /*
-                formatError:  {
-                    "message": "User does not exist!",
-                    "locations": [
-                        {
-                            "line": 2,
-                            "column": 3
-                        }
-                    ],
-                    "path": [
-                        "login"
-                    ]
-                }
-
-                 */
+                console.log(err)
+                return err.message
                 console.log('in formatError: ',JSON.stringify(err,null,4));
                 const errorObj = {}
-                errorObj.message = err.message;
-                if (err.originalError && err.originalError.error_message) {
-                   // err.message = err.originalError.error_message;
-                    console.log('errorObj: ',JSON.stringify(errorObj,null,4));
-
-                    err = errorObj;
-                }
-                if (err.originalError ) {
-                    console.log('originalerror: ',JSON.stringify(err.originalError,null,4))
-                    console.log('errorObj: ',JSON.stringify(errorObj,null,4));
-                    err = errorObj;
-
-                }
+                // errorObj.message = err.message;
+                // if (err.originalError && err.originalError.error_message) {
+                //    // err.message = err.originalError.error_message;
+                //     console.log('errorObj: ',JSON.stringify(errorObj,null,4));
+                //
+                //     err = errorObj;
+                // }
+                // if (err.originalError ) {
+                //     console.log('originalerror: ',JSON.stringify(err.originalError,null,4))
+                //     console.log('errorObj: ',JSON.stringify(errorObj,null,4));
+                //     err = errorObj;
+                //
+                // }
                // return err;*/
-                console.log('errorObj: ',JSON.stringify(errorObj,null,4));
-               return errorObj;
+                //console.log('errorObj: ',JSON.stringify(errorObj,null,4));
+               // return errorObj;
             }
         })),
     );

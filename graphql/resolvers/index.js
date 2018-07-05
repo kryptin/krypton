@@ -89,6 +89,7 @@ export default {
         getEvent: EventResolvers.getEvent,
         getEventByGroup: EventResolvers.getEventByGroup,
         getPopularEvents: EventResolvers.getPopularEvents,
+        getRandomEvents: EventResolvers.getRandomEvents,
 
         getEventMembers: EventMemberResolvers.getEventMembers,
         getUserEvents: EventMemberResolvers.getUserEvents,

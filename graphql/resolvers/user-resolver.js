@@ -14,7 +14,7 @@ export default {
             const duserid = user? user._id: user;
 
             Profile.create({ user: duserid, country:"Nigeria", state:"Lagos" });
-            const group = await Group.create({ title: "Family", description:"Keep family events organised here", user: duserid, user_type:"Admin" });
+            const group = await Group.create({ title: "Default Group", description:"Keep family events organised here", user: duserid, user_type:"Admin" });
             const groupMember = await GroupMember.create({ group: group._id, user: duserid, user_type:"Admin" });
 
             const event = await Event.create({ group: group._id,  title: args.username+"'s Birthday", description:"Celebrating Life", user: duserid, user_type:"Admin", e_type:"Private" });

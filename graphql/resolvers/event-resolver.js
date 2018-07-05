@@ -41,6 +41,18 @@ export default {
     }
    },
 
+    getRandomEvents: async(_, {user}) =>{
+        try{
+            return Event.aggregate([
+                {$match: {e_type:"Public"}}, // filter the results
+                {$sample: {size: 5}} // You want to get 5 docs
+            ]);
+            // return Event.find({e_type:"Public"}).sort({created_at:-1})
+        } catch (error){
+            throw  error;
+        }
+    },
+
   addEvent: async (_, args, { user }) => {
     try {
      await requireAuth(user);
