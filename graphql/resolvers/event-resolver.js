@@ -59,10 +59,11 @@ export default {
       const duserid = user? user._id: user;
       var event = new Event({ ...args, user: duserid});
       event.save(function (err) {
-        if (err) return handleError(err);
+        if (err) return err;
         // saved!
       });
      EventMember.create({ event: event._id, user: duserid, user_type:"Admin" });
+
       return event;
     } catch (error) {
       throw error;

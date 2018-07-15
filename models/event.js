@@ -7,7 +7,7 @@ var eventSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
+        // required: true
     },
     group: {
         type: Schema.Types.ObjectId,

@@ -29,7 +29,7 @@ export default {
 
       var group = new Group({ ...args, user: duserid  });
       group.save(function (err) {
-        if (err) return handleError(err);
+        if (err) return err;
         // saved!
       })
       GroupMember.create({ group: group._id, user: duserid, user_type:"Admin" });
