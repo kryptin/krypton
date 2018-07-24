@@ -47,7 +47,7 @@ export default {
     try {
         await requireAuth(user);
         const duserid = user? user._id: user;
-        return Profile.update({ ...args, user: duserid });
+        return Profile.update({user: duserid}, args );
     } catch (error) {
       throw error;
     }

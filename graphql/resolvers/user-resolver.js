@@ -44,7 +44,7 @@ export default {
         }
     },
 
-    login: async (_, {email, password}) => {
+    login: async (_, {email, password, onesignal_playerId}) => {
         try {
             const user = await User.findOne({email});
 
@@ -54,6 +54,10 @@ export default {
 
             if (!user.authenticateUser(password)) {
                 throw new Error('Password not correct!');
+            }
+
+            if (user){
+                await User.findByIdAndUpdate( user._id , { onesignal_playerId:onesignal_playerId });
             }
 
             return {

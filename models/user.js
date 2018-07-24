@@ -20,6 +20,9 @@ var userSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    onesignal_playerId:{
+        type: String,
+    },
     image_path: {
         type: String,
     },

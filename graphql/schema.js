@@ -5,6 +5,7 @@ export default`
     username: String
     email: String!
     image_path: String!
+    onesignal_playerId: String
     group: Group
     profile: Profile
     created_at: Date
@@ -208,8 +209,8 @@ export default`
     updateProfilePic(image_path: String!): User
     updateProfile(first_name:String!, last_name:String!, country: String, state: String, sex:String!, bio:String!, date_of_birth:String!, image_path:String): Profile
 
-    signup(email: String!, password: String!, image_path:String!, username: String): Auth
-    login(email: String!, password: String!): Auth
+    signup(email: String!, password: String!, image_path:String!, username: String, onesignal_playerId:String): Auth
+    login(email: String!, password: String!, onesignal_playerId:String): Auth
 
     addPhoto(image_url:String!, event:String!, description: String): Photo
     updatePhoto(url:String!, user: ID, event: ID, likes: ID, comments: ID): Photo
